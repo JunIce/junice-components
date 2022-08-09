@@ -1,0 +1,63 @@
+{
+  "name": "@JunIce/vue2",
+  "version": "0.1.0",
+  "description": "vue2 components",
+  "author": "east.qiu@gmail.com",
+  "main": "dist/rj_12.vue.lib.umd.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name rj_12.vue.lib src/components/index.js"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "element-ui": "2.15.7",
+    "vue": "2.6.12",
+    "vue-router": "3.4.9",
+    "vuex": "3.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/runtime": "^7.14.6",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@vue/cli-plugin-babel": "4.4.6",
+    "@vue/cli-plugin-eslint": "4.4.6",
+    "@vue/cli-service": "4.4.6",
+    "axios": "^0.27.2",
+    "babel-eslint": "10.1.0",
+    "babel-plugin-dynamic-import-node": "2.3.3",
+    "chalk": "4.1.0",
+    "compression-webpack-plugin": "5.0.2",
+    "connect": "3.6.6",
+    "eslint": "7.15.0",
+    "eslint-plugin-vue": "7.2.0",
+    "lint-staged": "10.5.3",
+    "mockjs": "^1.1.0",
+    "node-less": "^1.0.0",
+    "prettier": "^2.3.2",
+    "runjs": "4.4.2",
+    "sass": "1.32.13",
+    "sass-loader": "10.1.1",
+    "script-ext-html-webpack-plugin": "2.1.5",
+    "svg-sprite-loader": "5.1.1",
+    "terser-webpack-plugin": "^4.2.3",
+    "url-loader": "^2.3.0",
+    "vue-template-compiler": "2.6.12"
+  },
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "gitHead": "a303f1c5cb682f2e4e165b8a1c293b28de616561"
+}
