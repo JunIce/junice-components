@@ -1,4 +1,4 @@
-# Contributing to JunIce
+# Contributing to junice
 
 ## Set up
 
@@ -14,7 +14,7 @@ $ yarn
 # develop for h5
 $ yarn dev
 
-If you want runs JunIce Design demo for react-native, Then
+If you want runs junice Design demo for react-native, Then
 # develop for react-native
 $ cd rnkit && yarn install && cd ios && pod install && cd ../..
 
@@ -61,7 +61,7 @@ $ yarn test:h5 --coverage
 
 ## Build
 
-compiles TypeScript code to the lib and es directory, and creates UMD build of JunIce in dist directory.
+compiles TypeScript code to the lib and es directory, and creates UMD build of junice in dist directory.
 
 ```bash
 $ yarn build

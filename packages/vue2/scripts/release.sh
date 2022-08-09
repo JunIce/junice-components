@@ -30,8 +30,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
   # publish
   # git push origin refs/tags/v"$VERSION"
-  git tag @JunIce/vue2@"$VERSION"
-  git push origin @JunIce/vue2@"$VERSION"
+  git tag @junice/vue2@"$VERSION"
+  git push origin @junice/vue2@"$VERSION"
   git push origin main
 
   if [[ $VERSION =~ "alpha" ]]
