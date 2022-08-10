@@ -20,6 +20,7 @@
     "test": "lerna exec --no-private -- yarn test",
     "build:vue": "lerna exec --scope=@junice/vue2 -- yarn build",
     "serve": "lerna exec --scope=@junice/vue2 -- yarn serve",
+    "serve:site": "lerna exec --scope=site -- yarn serve",
     "deploy:build": "yarn prebuild && lerna exec --scope site -- yarn build -p",
     "deploy": "lerna exec --scope site -- gh-pages -d assets",
     "release": "lerna publish",

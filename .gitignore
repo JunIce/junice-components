@@ -6,6 +6,7 @@ _book
 .prettierrc.yaml
 *.log
 *.iml
+*.lock
 package-lock.json
 /node_modules/
 /packages/*/node_modules/
