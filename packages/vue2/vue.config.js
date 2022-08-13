@@ -1,4 +1,5 @@
 const pkg = require('./package.json');
+const { defineConfig } = require('@vue/cli-service');
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -12,7 +13,7 @@ const cdn = {
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-module.exports = {
+module.exports = defineConfig({
   assetsDir: 'static',
   lintOnSave: !isProd,
   productionSourceMap: false,
@@ -87,24 +88,22 @@ module.exports = {
   chainWebpack(config) {
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
-    config.output
-      .library(`${packageName}-[name]`)
-      .libraryTarget('umd')
-      .jsonpFunction(`webpackJsonp_${packageName}`);
+    config.output.library(`${packageName}-[name]`).libraryTarget('umd');
+    // .jsonpFunction(`webpackJsonp_${packageName}`);
     // 压缩图片
-    config.module
-      .rule('images')
-      .use('url-loader')
-      .loader('url-loader')
-      .tap((options) => Object.assign(options, { limit: 20000 }));
+    // config.module
+    //   .rule('images')
+    //   .use('url-loader')
+    //   .loader('url-loader')
+    //   .tap((options) => Object.assign(options, { limit: 20000 }));
 
-    config.module
-      .rule('fonts')
-      .test(/.(ttf|otf|eot|woff|woff2)$/)
-      .use('url-loader')
-      .loader('url-loader')
-      .options({})
-      .end();
+    // config.module
+    //   .rule('fonts')
+    //   .test(/.(ttf|otf|eot|woff|woff2)$/)
+    //   .use('url-loader')
+    //   .loader('url-loader')
+    //   .options({})
+    //   .end();
     // config.when(isProd, (config) => {
     //   config
     //     .plugin('html')
@@ -146,4 +145,4 @@ module.exports = {
     //     };
     // });
   },
-};
+});
