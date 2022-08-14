@@ -1,20 +1,29 @@
 <template>
-  <div>
-    <div v-html="html"></div>
-    <side-tree :options="options"></side-tree>
+  <div class="site-container">
+    <headerVue></headerVue>
+    <sideBar></sideBar>
+    <main class="page">
+      <MainContent></MainContent>
+    </main>
   </div>
 </template>
 
 <script>
-import config from "../site.config"
-import MarkdownIt  from "markdown-it"
-
-const mdRender = MarkdownIt();
+import config from '../site.config';
+import { mRender } from '../src/utils/parse';
+import headerVue from './components/header.vue';
+import sideBar from './components/menu.vue';
+import MainContent from './components/content.vue';
 
 export default {
+  components: {
+    headerVue,
+    sideBar,
+    MainContent,
+  },
   data() {
     return {
-        html: '',
+      html: '',
       options: [
         {
           label: '零、基础知识',
@@ -89,11 +98,24 @@ export default {
   },
   mounted() {
     const md = config[0].module();
-    md.then(res => {
-        const html = mdRender.render(res.default)
-        this.html = html
-        console.log(html);
-    })
-  }
+    md.then((res) => {
+      const html = mRender.render(res.default);
+      this.html = html;
+      // console.log(html);
+    });
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.site-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .page {
+    padding-top: var(--header-height);
+    margin-left: 20rem;
+  }
+}
+</style>
