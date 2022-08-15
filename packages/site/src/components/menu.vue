@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <ul>
-      <li v-for="(menu, idx) in sideMenus" :key="idx">
+      <li v-for="(menu, idx) in sideMenus" :key="idx" class="menu-item" @click="goToView(menu)">
         <span>{{ menu.label }}</span>
       </li>
     </ul>
@@ -15,6 +15,13 @@ export default {
   computed: {
     sideMenus() {
       return menus;
+    },
+  },
+  methods: {
+    goToView(menu) {
+      this.$router.push({
+        path: menu.path,
+      });
     },
   },
 };
@@ -35,5 +42,14 @@ export default {
   transform: translate(0);
   transition: transform 0.25s ease;
   margin-top: 1px;
+
+  .menu-item {
+    cursor: pointer;
+    padding: 10px 20px;
+
+    &:hover {
+      color: var(--c-brand);
+    }
+  }
 }
 </style>

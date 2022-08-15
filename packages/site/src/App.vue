@@ -97,11 +97,16 @@ export default {
     };
   },
   mounted() {
-    const md = config[0].module();
-    md.then((res) => {
-      const html = mRender.render(res.default);
-      this.html = html;
-      // console.log(html);
+    config.forEach(async (c) => {
+      const raw = await c.module();
+      const html = mRender.render(raw.default);
+      this.$router.addRoute({
+        path: c.path,
+        name: c.label,
+        component: {
+          template: `<div>${html}</div>`,
+        },
+      });
     });
   },
 };
