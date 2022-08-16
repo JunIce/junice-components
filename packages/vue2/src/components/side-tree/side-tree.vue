@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'side-tree',
+  name: 'SideTree',
   model: {
     prop: 'value',
     event: 'change',
