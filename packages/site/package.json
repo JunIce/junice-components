@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@junice/vue2": "^0.1.0",
+    "highlight.js": "^11.6.0",
     "html-webpack-plugin": "^5.5.0",
     "markdown-it": "^13.0.1",
     "raw-loader": "^4.0.2",

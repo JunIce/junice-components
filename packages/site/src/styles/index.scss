@@ -1,6 +1,8 @@
 @import "./variable.scss";
 @import "./reset.scss";
-html,body {
+
+html,
+body {
   width: 100%;
   height: 100%;
   padding: 0;
@@ -22,4 +24,68 @@ body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+main.content {
+  padding: 20px;
+
+  h1 {
+    font-weight: bold;
+    font-size: 30px;
+    color: #333;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 24px;
+    color: #333;
+  }
+
+  pre {
+    background-color: #333;
+    color: #f1f1f1;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  table {
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    width: 100%;
+    min-width: 600px;
+    font-size: 14px;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th,
+    td {
+      border-bottom: 1px solid #eaeefb;
+      padding: 10px;
+      max-width: 250px;
+    }
+
+    th {
+      text-align: left;
+      border-top: 1px solid #eaeefb;
+      background-color: #f9fafc;
+      white-space: nowrap;
+      font-weight: normal;
+      color: #999;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    tr {
+      &:hover {
+        background: rgba(60, 90, 100, .04);
+      }
+    }
+
+    td {
+      &:nth-child(2) {
+        width: 22%;
+        color: #1890ff;
+        font-size: 13px;
+      }
+    }
+  }
 }
