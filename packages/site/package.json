@@ -20,10 +20,13 @@
     "url": "https://github.com/JunIce/junice-componets/issues"
   },
   "dependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
     "@junice/vue2": "^0.1.0",
-    "highlight.js": "^11.6.0",
+    "babel-plugin-prismjs": "^2.1.0",
     "html-webpack-plugin": "^5.5.0",
     "markdown-it": "^13.0.1",
+    "prismjs": "^1.28.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.54.4",
     "sass-loader": "^13.0.2",

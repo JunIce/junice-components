@@ -1,13 +1,18 @@
 # SideTree
 
-边框123
+边框 123
 sdfds
 
-
-```vue
+```html
 <template>
-    <side-tree></side-tree>
+  <side-tree></side-tree>
 </template>
+```
+
+```css
+div {
+  color: red;
+}
 ```
 
 ## API
@@ -17,4 +22,3 @@ sdfds
 | options | array | 数据格式    |
 |         |       |             |
 |         |       |             |
-

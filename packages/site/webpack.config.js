@@ -17,8 +17,11 @@ module.exports = {
         loader: 'raw-loader',
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,
