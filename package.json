@@ -20,6 +20,7 @@
     "test": "lerna exec --no-private -- yarn test",
     "build:vue": "lerna exec --scope=@junice/vue2 -- yarn build",
     "build:site": "lerna exec --scope=site -- yarn build",
+    "release:site": "node scripts/release.mjs",
     "serve": "lerna exec --scope=@junice/vue2 -- yarn serve",
     "serve:site": "lerna exec --scope=site -- yarn serve",
     "deploy:build": "yarn prebuild && lerna exec --scope site -- yarn build -p",
@@ -62,5 +63,8 @@
     "stylelint": "13.8.0",
     "stylelint-scss": "^3.18.0",
     "typescript": "4.0.2"
+  },
+  "dependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
