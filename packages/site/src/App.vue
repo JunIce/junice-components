@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import config from '../site.config';
-import { mRender } from '../src/utils/parse';
 import headerVue from './components/header.vue';
 import sideBar from './components/menu.vue';
 import MainContent from './components/content.vue';
@@ -20,19 +18,6 @@ export default {
     headerVue,
     sideBar,
     MainContent,
-  },
-  mounted() {
-    config.forEach(async (c) => {
-      const raw = await c.module();
-      const html = mRender.render(raw.default);
-      this.$router.addRoute({
-        path: c.path,
-        name: c.label,
-        component: {
-          template: `<main class="content">${html}</main>`,
-        },
-      });
-    });
   },
 };
 </script>
