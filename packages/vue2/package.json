@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "description": "vue2 components",
   "author": "east.qiu@gmail.com",
-  "main": "dist/rj_12.vue.lib.umd.js",
+  "main": "dist/junice.vue2.umd.js",
+  "exports": {
+    "import": "dist/junice.vue2.umd.js",
+    "require": "dist/junice.vue2.umd.js"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name rj_12.vue.lib src/components/index.js"
+    "build": "vue-cli-service build --target lib --name junice.vue2 src/components/index.js"
   },
   "lint-staged": {
     "*.{js,vue}": [

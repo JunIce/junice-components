@@ -88,7 +88,7 @@ module.exports = defineConfig({
   chainWebpack(config) {
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
-    config.output.library(`${packageName}-[name]`).libraryTarget('umd');
+    config.output.library(`${packageName}-[name]`).libraryTarget('esm');
     // .jsonpFunction(`webpackJsonp_${packageName}`);
     // 压缩图片
     // config.module
