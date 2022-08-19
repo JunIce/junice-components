@@ -24,7 +24,7 @@ module.exports = defineConfig({
       'Access-Control-Allow-Origin': '*',
     },
     hot: true,
-    disableHostCheck: true,
+    // disableHostCheck: true,
     // proxy: {
     //   "/": {
     //     target: process.env.VUE_APP_BASE_API, // 本地
@@ -88,7 +88,7 @@ module.exports = defineConfig({
   chainWebpack(config) {
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
-    config.output.library(`${packageName}-[name]`).libraryTarget('esm');
+    config.output.library(`${packageName}-[name]`).libraryTarget('umd');
     // .jsonpFunction(`webpackJsonp_${packageName}`);
     // 压缩图片
     // config.module
