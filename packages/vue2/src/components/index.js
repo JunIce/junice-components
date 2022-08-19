@@ -9,6 +9,10 @@ const install = (Vue, options) => {
     const ctrl = files(ele).default || files(ele);
     Vue.component(ctrl.name, ctrl);
   });
+
+  if (Vue.prototype.$dialogContainer) {
+    Vue.prototype.$dialogContainer = createContainer();
+  }
 };
 
 // 如果是直接引入的

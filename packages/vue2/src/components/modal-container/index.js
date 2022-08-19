@@ -82,7 +82,3 @@ function createModal(name = '', comp) {
 
   return context;
 }
-
-if (Vue.prototype.$container) {
-  Vue.prototype.$dialogContainer = createContainer();
-}
