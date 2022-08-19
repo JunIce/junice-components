@@ -1,3 +1,4 @@
+import { createContainer } from './modal-container';
 const files = require.context('.', true, /\.vue$/);
 
 const install = (Vue, options) => {
@@ -17,4 +18,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
+  createContainer,
 };
