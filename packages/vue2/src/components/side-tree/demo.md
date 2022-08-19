@@ -1,12 +1,11 @@
 # SideTree
 
-边框 123
-sdfds
+文章树形结构菜单
 
 ```vue
 <template>
   <div class="side-container">
-    <side-tree :options="options"></side-tree>
+    <side-tree :options="options" @change="onChange" :fieldNames="fieldNames"></side-tree>
   </div>
 </template>
 
@@ -14,6 +13,11 @@ sdfds
 export default {
   data() {
     return {
+      fieldNames: {
+        children: 'children',
+        label: 'label',
+        key: 'key',
+      },
       options: [
         {
           label: '零、基础知识',
@@ -98,8 +102,16 @@ export default {
 
 ## API
 
-| name    | type  | description |
-| ------- | ----- | ----------- |
-| options | array | 数据格式    |
-|         |       |             |
-|         |       |             |
+### props
+
+| name       | type                                                      | description  |
+| ---------- | --------------------------------------------------------- | ------------ |
+| options    | array                                                     | 数据格式     |
+| fieldNames | Object{ children: 'chidren', label: 'label', key: 'key' } | 数据字段配置 |
+| value      | string[] \| number[]                                      | 绑定值       |
+
+### events
+
+| name   | type                      | description |
+| ------ | ------------------------- | ----------- |
+| change | Function \| (rowid) => {} | 点击事件    |
