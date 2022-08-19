@@ -4,10 +4,6 @@
   "description": "vue2 components",
   "author": "east.qiu@gmail.com",
   "main": "dist/junice.vue2.umd.js",
-  "exports": {
-    "import": "dist/junice.vue2.umd.js",
-    "require": "dist/junice.vue2.umd.js"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name junice.vue2 src/components/index.js"
