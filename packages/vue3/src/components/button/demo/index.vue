@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>123</h1>
+    <e-button>default</e-button>
+    <e-button type="primary">primary</e-button>
+    <e-button type="danger">danger</e-button>
+    <e-button type="warning">warning</e-button>
   </div>
 </template>
 <script lang="ts">
