@@ -55,6 +55,11 @@
       pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
     }
   }
+
+
+  &-rounded {
+    border-radius:60px;
+  }
 }
 
 
@@ -161,4 +166,77 @@ input[type="button"] {
   &.btn-block {
     width: 100%;
   }
+}
+
+.btn-default.btn-outline {
+  background-color: $white;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $light;
+  }
+}
+.btn-primary.btn-outline {
+  color: $primary;
+  background-color: $white;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $primary;
+    color: $white;
+  }
+}
+
+.btn-success.btn-outline {
+  color: $success;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $success;
+    color: $white;
+  }
+}
+
+.btn-info.btn-outline {
+  color: $info;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $info;
+    color: $white;
+  }
+}
+
+.btn-warning.btn-outline {
+  color: $warning;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $warning;
+    color: $white;
+  }
+}
+
+.btn-danger.btn-outline {
+  color: $danger;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &.focus {
+    background: $danger;
+    color: $white;
+  }
+}
+.button-box .btn {
+  margin: 0 8px 8px 0px;
+}
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+  color: white;
 }

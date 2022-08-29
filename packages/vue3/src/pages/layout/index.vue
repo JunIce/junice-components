@@ -51,6 +51,12 @@ $header-height: 50px;
     // overflow-y: auto;
   }
 
+  .page-content {
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
   .menu-container {
     overflow-y: auto;
 
