@@ -3,13 +3,7 @@
 </script>
 
 <template>
-  <div>
-    <div>
-      <router-link to="/">home</router-link>
-      <router-link to="/foo">foo</router-link>
-    </div>
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <style scoped></style>
