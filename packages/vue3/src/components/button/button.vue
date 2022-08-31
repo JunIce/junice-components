@@ -58,5 +58,5 @@ const cls = computed(() => {
 });
 </script>
 <style lang="scss" scoped>
-@import '../../styles/button/index.scss';
+@import '@/styles/button/index.scss';
 </style>

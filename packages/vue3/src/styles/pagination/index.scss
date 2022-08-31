@@ -1,0 +1,106 @@
+// Pagination
+
+@import "../variables";
+@import "../mixins";
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+
+  li>a,
+  li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+
+  li {
+    display: inline;
+  }
+
+  li:first-child>a,
+  li:first-child>span {
+    border-bottom-left-radius: $radius;
+    border-top-left-radius: $radius;
+  }
+}
+
+
+
+.pagination>li:last-child>a,
+.pagination>li:last-child>span {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: $dark;
+}
+
+.pagination>li>a:hover,
+.pagination>li>span:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus {
+  background-color: $light;
+}
+
+.pagination-split li {
+  margin-left: 5px;
+  display: inline-block;
+  float: left;
+}
+
+.pagination-split li:first-child {
+  margin-left: 0;
+}
+
+.pagination-split li a {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+  background-color: $themecolor;
+  border-color: $themecolor;
+}
+
+
+
+
+// .pagination-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+//   > li {
+//     > a,
+//     > span {
+//       padding: @padding-vertical @padding-horizontal;
+//       font-size: @font-size;
+//       line-height: @line-height;
+//     }
+//     &:first-child {
+//       > a,
+//       > span {
+//         .border-left-radius(@border-radius);
+//       }
+//     }
+//     &:last-child {
+//       > a,
+//       > span {
+//         .border-right-radius(@border-radius);
+//       }
+//     }
+//   }
+// }
