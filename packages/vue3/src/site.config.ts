@@ -9,4 +9,9 @@ export default [
     path: '/components/epagination',
     module: () => import(`@/components/pagination/demo/index.vue`),
   },
+  {
+    name: 'EPanel',
+    path: '/components/epanel',
+    module: () => import(`@/components/panel/demo/index.vue`),
+  },
 ];

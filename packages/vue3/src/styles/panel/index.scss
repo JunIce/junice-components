@@ -1,0 +1,382 @@
+@import "../variables";
+@import "../mixins";
+
+.panel {
+  border-radius: $radius;
+  margin-bottom: 15px;
+  border: 0px;
+  a {
+    text-decoration: none;
+  }
+  .panel-heading {
+    border-radius: $radius;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 20px 25px;
+    .panel-title {
+      font-size: 14px;
+      color: $dark;
+    }
+    a {
+      i {
+        font-size: 12px;
+        margin-left: 8px;
+      }
+    }
+  }
+  .panel-action {
+    float: $rgt;
+
+    a {
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .panel-body {
+    padding: 25px;
+    &:first-child h3 {
+      margin-top: 0px;
+      font-weight: 600;
+      font-family: $basefont1;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+  }
+  .panel-footer {
+    background: $white;
+    border-radius: $radius;
+    padding: 20px 25px;
+  }
+}
+.panel-green,
+.panel-success {
+  border-color: $success;
+  .panel-heading {
+    border-color: $success;
+    color: white;
+    background-color: $success;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $success;
+    &:hover {
+      color: darken($success, 15%);
+    }
+  }
+}
+.panel-black,
+.panel-inverse {
+  border-color: $inverse;
+  .panel-heading {
+    border-color: $inverse;
+    color: white;
+    background-color: $inverse;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $inverse;
+    &:hover {
+      color: darken($inverse, 15%);
+    }
+  }
+}
+.panel-darkblue,
+.panel-primary {
+  border-color: $primary;
+  .panel-heading {
+    border-color: $primary;
+    color: white;
+    background-color: $primary;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $primary;
+    &:hover {
+      color: darken($primary, 15%);
+    }
+  }
+}
+.panel-blue,
+.panel-info {
+  border-color: $info;
+  .panel-heading {
+    border-color: $info;
+    color: white;
+    background-color: $info;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $info;
+    &:hover {
+      color: darken($info, 15%);
+    }
+  }
+}
+
+.panel-red,
+.panel-danger {
+  border-color: $danger;
+  .panel-heading {
+    border-color: $danger;
+    color: white;
+    background-color: $danger;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $danger;
+    &:hover {
+      color: darken($danger, 15%);
+    }
+  }
+}
+
+.panel-yellow,
+.panel-warning {
+  border-color: $warning;
+  .panel-heading {
+    border-color: $warning;
+    color: white;
+    background-color: $warning;
+    a {
+      color: $white;
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  a {
+    color: $warning;
+    &:hover {
+      color: darken($warning, 15%);
+    }
+  }
+}
+.panel-white,
+.panel-default {
+  border-color: $border;
+  .panel-heading {
+    color: $dark;
+    background-color: $white;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    color: $dark;
+  }
+  .panel-action a {
+    color: $dark;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+      color: $dark;
+    }
+  }
+  .panel-footer {
+    background: $white;
+    color: $dark;
+    border-top: 1px solid $border;
+  }
+}
+.full-panel-info {
+  border-color: $info;
+  .panel-heading {
+    border-color: $info;
+    color: white;
+    background-color: $info;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $info;
+    color: $white;
+  }
+  .panel-footer {
+    background: $info;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $info;
+    &:hover {
+      color: darken($info, 15%);
+    }
+  }
+}
+.full-panel-warning {
+  border-color: $warning;
+  .panel-heading {
+    border-color: $warning;
+    color: white;
+    background-color: $warning;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $warning;
+    color: $white;
+  }
+  .panel-footer {
+    background: $warning;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $warning;
+    &:hover {
+      color: darken($warning, 15%);
+    }
+  }
+}
+
+.full-panel-success {
+  border-color: $success;
+  .panel-heading {
+    border-color: $success;
+    color: white;
+    background-color: $success;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $success;
+    color: $white;
+  }
+  .panel-footer {
+    background: $success;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $success;
+    &:hover {
+      color: darken($success, 15%);
+    }
+  }
+}
+
+.full-panel-purple {
+  border-color: $purple;
+  .panel-heading {
+    color: white;
+    background-color: $purple;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $purple;
+    color: $white;
+  }
+  .panel-footer {
+    background: $purple;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $purple;
+    &:hover {
+      color: darken($purple, 15%);
+    }
+  }
+}
+
+.full-panel-danger {
+  border-color: $danger;
+  .panel-heading {
+    border-color: $danger;
+    color: white;
+    background-color: $danger;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $danger;
+    color: $white;
+  }
+  .panel-footer {
+    background: $danger;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $danger;
+    &:hover {
+      color: darken($danger, 15%);
+    }
+  }
+}
+.full-panel-inverse {
+  border-color: $inverse;
+  .panel-heading {
+    border-color: $inverse;
+    color: white;
+    background-color: $inverse;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    background: $inverse;
+    color: $white;
+  }
+  .panel-footer {
+    background: $inverse;
+    color: $white;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $inverse;
+    &:hover {
+      color: darken($inverse, 15%);
+    }
+  }
+}
+
+.full-panel-default {
+  border-color: $border;
+  .panel-heading {
+    color: $dark;
+    background-color: $white;
+    border-bottom: 1px solid $border;
+  }
+  .panel-body {
+    color: $dark;
+  }
+  .panel-footer {
+    background: $white;
+    color: $dark;
+    border-top: 1px solid $border;
+  }
+  a {
+    color: $dark;
+    &:hover {
+      color: darken($inverse, 15%);
+    }
+  }
+}
+.panel-opcl {
+  float: right;
+  i {
+    margin-left: 8px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+}
