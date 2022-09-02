@@ -14,4 +14,9 @@ export default [
     path: '/components/epanel',
     module: () => import(`@/components/panel/demo/index.vue`),
   },
+  {
+    name: 'ETable',
+    path: '/components/etable',
+    module: () => import(`@/components/table/demo/index.vue`),
+  },
 ];

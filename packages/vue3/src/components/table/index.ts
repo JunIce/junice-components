@@ -1,5 +1,5 @@
-import Panel from './panel.vue';
+import Table from './table.vue';
 
-Panel.name = 'ePanel';
+Table.name = 'eTable';
 
-export default Panel;
+export default Table;

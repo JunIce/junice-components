@@ -2,58 +2,15 @@
   <div class="table-responsive">
     <table class="table" :class="cls">
       <thead>
-        <tr>
-          <th v-for="option in options" :key="option.prop">{{ option.title }}</th>
-        </tr>
+        <renderThHeadNodes />
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Deshmukh</td>
-          <td>Prohaska</td>
-          <td>@Genelia</td>
-          <td><span class="label label-danger">admin</span></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Deshmukh</td>
-          <td>Gaylord</td>
-          <td>@Ritesh</td>
-          <td><span class="label label-info">member</span></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Sanghani</td>
-          <td>Gusikowski</td>
-          <td>@Govinda</td>
-          <td><span class="label label-warning">developer</span></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Roshan</td>
-          <td>Rogahn</td>
-          <td>@Hritik</td>
-          <td><span class="label label-success">supporter</span></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Joshi</td>
-          <td>Hickle</td>
-          <td>@Maruti</td>
-          <td><span class="label label-info">member</span></td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Nigam</td>
-          <td>Eichmann</td>
-          <td>@Sonu</td>
-          <td><span class="label label-success">supporter</span></td>
-        </tr>
+        <renderTrNodes />
       </tbody>
     </table>
   </div>
 </template>
-<script setup lang="ts">
+<script setup lang="tsx">
 import { computed } from '@vue/reactivity';
 import { defineProps, useSlots } from 'vue';
 const props = defineProps({
@@ -79,6 +36,8 @@ const props = defineProps({
   },
 });
 
+const slots = useSlots();
+
 const cls = computed(() => {
   return {
     'table-hover': props.hover,
@@ -86,7 +45,47 @@ const cls = computed(() => {
     'table-striped': props.stripe,
   };
 });
+
+/**
+ * 渲染table header
+ */
+const renderThHeadNodes = () => {
+  return (
+    <tr>
+      {props.options.map((option: any) => {
+        return <th key={option.prop}>{option.title}</th>;
+      })}
+    </tr>
+  );
+};
+
+/**
+ * 渲染table row
+ */
+const renderTrNodes = () => {
+  return props.data.map((row: any, idx: number) => {
+    return (
+      <tr>
+        {props.options.map((option: any) => {
+          return <td prop={option.prop}>{renderContent(row, option.prop, idx)}</td>;
+        })}
+      </tr>
+    );
+  });
+};
+
+/**
+ * 内容渲染
+ * @param row
+ * @param prop
+ * @param idx
+ */
+const renderContent = (row: any, prop: string, idx: number) => {
+  if (slots[prop]) return slots[prop]!({ row, prop });
+  if (prop === '$index') return idx + 1;
+  return row[prop];
+};
 </script>
 <style lang="scss" scoped>
-@import '@/styles/panel/index.scss';
+@import '@/styles/table/index.scss';
 </style>
