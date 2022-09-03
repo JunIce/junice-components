@@ -19,4 +19,9 @@ export default [
     path: '/components/etable',
     module: () => import(`@/components/table/demo/index.vue`),
   },
+  {
+    name: 'ETab',
+    path: '/components/etab',
+    module: () => import(`@/components/tab/demo/index.vue`),
+  },
 ];
