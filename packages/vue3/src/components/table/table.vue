@@ -34,6 +34,13 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  align: {
+    type: String,
+    default: 'left',
+  },
+  customRowClass: {
+    type: Function,
+  },
 });
 
 const slots = useSlots();
@@ -51,7 +58,7 @@ const cls = computed(() => {
  */
 const renderThHeadNodes = () => {
   return (
-    <tr>
+    <tr align={props.align}>
       {props.options.map((option: any) => {
         return <th key={option.prop}>{option.title}</th>;
       })}
@@ -63,11 +70,16 @@ const renderThHeadNodes = () => {
  * 渲染table row
  */
 const renderTrNodes = () => {
-  return props.data.map((row: any, idx: number) => {
+  return props.data.map((row: any, index: number) => {
+    const cls = props.customRowClass ? props.customRowClass({ row, index }) : {};
     return (
-      <tr>
+      <tr key={index} class={cls} align={props.align}>
         {props.options.map((option: any) => {
-          return <td prop={option.prop}>{renderContent(row, option.prop, idx)}</td>;
+          return (
+            <td prop={option.prop} key={option.prop}>
+              {renderContent(row, option.prop, index)}
+            </td>
+          );
         })}
       </tr>
     );
@@ -86,6 +98,6 @@ const renderContent = (row: any, prop: string, idx: number) => {
   return row[prop];
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/styles/table/index.scss';
 </style>

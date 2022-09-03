@@ -1,6 +1,6 @@
 <template>
   <div>
-    <e-table :options="options" :data="data">
+    <e-table :options="options" :data="data" :custom-row-class="customRowClass" align="left">
       <template #role="{ row }">
         <button>{{ row.role }}</button>
       </template>
@@ -47,9 +47,13 @@ export default defineComponent({
       }),
     );
 
+    const customRowClass = ({ row, index }) => {
+      return index == 2 ? 'success' : '';
+    };
     return {
       options,
       data,
+      customRowClass,
     };
   },
 });
