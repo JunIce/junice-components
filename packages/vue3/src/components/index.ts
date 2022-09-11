@@ -5,6 +5,7 @@ import Pagination from './pagination';
 import Panel from './panel';
 import Table from './table';
 import Tab from './tab';
+import TabPane from './tab/tab-pane.vue';
 
 // const files = import.meta.glob("./*/*.ts")
 
@@ -17,5 +18,6 @@ export default {
     app.component(Panel.name, Panel);
     app.component(Table.name, Table);
     app.component(Tab.name, Tab);
+    app.component(TabPane.name, TabPane);
   },
 };
