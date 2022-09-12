@@ -252,3 +252,13 @@
   // Remove the top rounded corners here since there is a hard edge above the menu
   @include border-top-radius(0);
 }
+
+
+/*Custom tab*/
+.customtab li.active a,
+.customtab li.active a:hover,
+.customtab li.active a:focus {
+  border: unset;
+  border-bottom: 2px solid $themecolor;
+  color: $themecolor;
+}

@@ -14,6 +14,21 @@
         <h1>Settings</h1>
       </e-tab-pane>
     </e-tab>
+
+    <e-tab :card="true">
+      <e-tab-pane title="Home" key="Home">
+        <h1>home</h1>
+      </e-tab-pane>
+      <e-tab-pane title="Profile" key="Profile">
+        <h1>Profile</h1>
+      </e-tab-pane>
+      <e-tab-pane title="Messages" key="Messages">
+        <h1>Messages</h1>
+      </e-tab-pane>
+      <e-tab-pane title="Settings" key="Settings">
+        <h1>Settings</h1>
+      </e-tab-pane>
+    </e-tab>
   </div>
 </template>
 <script lang="ts">

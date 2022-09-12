@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs" :class="{ customtab: !props.card }" role="tablist">
     <li
       v-for="tab in tabs"
       role="presentation"
@@ -20,6 +20,10 @@
 import { computed } from '@vue/reactivity';
 import { defineProps, useSlots, ref } from 'vue';
 const props = defineProps({
+  card: {
+    type: Boolean,
+    default: false,
+  },
   title: {
     type: String,
     default: '',
