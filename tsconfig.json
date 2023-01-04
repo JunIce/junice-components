@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./packages",
-    "target": "ES2019",
-    "module": "commonjs",
+    "target": "ESNext",
     "moduleResolution": "node",
     "importHelpers": true,
     "jsx": "react",
