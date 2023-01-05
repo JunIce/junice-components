@@ -14,6 +14,12 @@ module.exports = {
   ],
   webpackFinal: async (config) => {
     config.module.rules.push({
+        test: /\.s[ca]ss$/,
+        use: [
+          'style-loader', 'css-loader', 'sass-loader'
+        ],
+    })
+    config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: require.resolve('babel-loader'),
       options: {
