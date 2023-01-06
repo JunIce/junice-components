@@ -6,16 +6,27 @@ import { BaseButtonProps } from './interface';
 import './Button.scss';
 
 const Button = forwardRef<null, BaseButtonProps>((props, ref) => {
-  const { children, size, loading, className, type, round, outline, circle, disabled, onClick } =
-    props;
+  const {
+    children,
+    size,
+    loading,
+    className,
+    type,
+    shape,
+    disabled,
+    outline = false,
+    block = false,
+    onClick,
+  } = props;
   const buttonRef = ref;
 
   const prefixCls = 'btn';
-  const _type = type === 'default' ? 'secondary' : type;
+  const _type = type || 'default';
   const classNames = cs(
     prefixCls,
     `${prefixCls}-${_type}`,
     {
+      [`${prefixCls}-block`]: block,
       // [`${prefixCls}-long`]: long,
       // [`${prefixCls}-status-${status}`]: status,
       // [`${prefixCls}-loading-fixed-width`]: loadingFixedWidth,
@@ -25,8 +36,8 @@ const Button = forwardRef<null, BaseButtonProps>((props, ref) => {
       [`${prefixCls}-disabled`]: disabled,
       // [`${prefixCls}-rtl`]: rtl,
       [`${prefixCls}-outline`]: outline,
-      [`${prefixCls}-rounded`]: round,
-      [`${prefixCls}-circle`]: circle,
+      [`${prefixCls}-rounded`]: shape == 'round',
+      [`${prefixCls}-circle`]: shape == 'circle',
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-xs`]: size === 'mini',

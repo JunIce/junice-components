@@ -18,7 +18,7 @@ export interface BaseButtonProps {
    * `text`, `linear` and `default` which is the secondary.
    * @defaultValue default
    */
-  type?: 'default' | 'primary' | 'secondary' | 'dashed' | 'text' | 'outline';
+  type?: 'default' | 'primary' | 'info' | 'success' | 'danger' | 'warning';
   /**
    * @zh 按钮状态
    * @en Status of the button
@@ -88,9 +88,7 @@ export interface BaseButtonProps {
    */
   onClick?: (e: Event) => void;
 
-
-  circle?: boolean;
-  round?: boolean;
+  block?: boolean;
   outline?: boolean;
 }
 
