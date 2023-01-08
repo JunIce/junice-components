@@ -1,8 +1,8 @@
 @mixin user-select($select) {
   -webkit-user-select: $select;
-     -moz-user-select: $select;
-      -ms-user-select: $select; // IE10+
-          user-select: $select;
+  -moz-user-select: $select;
+  -ms-user-select: $select; // IE10+
+  user-select: $select;
 }
 
 
@@ -23,15 +23,17 @@
 
 @mixin box-shadow($shadow) {
   -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
-          box-shadow: $shadow;
+  box-shadow: $shadow;
 }
 
 @mixin clearfix() {
+
   &:before,
   &:after {
     content: " "; // 1
     display: table; // 2
   }
+
   &:after {
     clear: both;
   }
@@ -46,5 +48,5 @@
 
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;
-   border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
 }
