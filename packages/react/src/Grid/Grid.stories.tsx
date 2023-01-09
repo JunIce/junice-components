@@ -8,14 +8,20 @@ export default {
 
 export const basic = () => {
 
+  const rowStyle: CSSProperties = {
+    marginBottom: '20px'
+  }
+
   const colStyle: CSSProperties = {
     'textAlign': 'center',
-    backgroundColor: 'red'
+    border: '1px solid #78828c21',
+    padding: '10px 15px',
+    backgroundColor: '#f7fafc'
   }
 
   return (
     <>
-      <Row>
+      <Row style={rowStyle}>
         <Col span={1} style={colStyle}>col</Col>
         <Col span={1} style={colStyle}>col</Col>
         <Col span={1} style={colStyle}>col</Col>
@@ -30,6 +36,18 @@ export const basic = () => {
         <Col span={1} style={colStyle}>col</Col>
         <Col span={1} style={colStyle}>col</Col>
         <Col span={1} style={colStyle}>col</Col>
+      </Row>
+
+
+      <Row style={rowStyle}>
+        <Col span={6} style={colStyle}>col</Col>
+        <Col span={6} style={colStyle}>col</Col>
+      </Row>
+
+      <Row style={rowStyle}>
+        <Col span={4} style={colStyle}>col</Col>
+        <Col span={4} style={colStyle}>col</Col>
+        <Col span={4} style={colStyle}>col</Col>
       </Row>
     </>
   )

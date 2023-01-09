@@ -16,6 +16,8 @@
         padding-left: ceil(($grid-gutter-width / 2));
         padding-right: floor(($grid-gutter-width / 2));
 
+        box-sizing: border-box;
+
         float: left;
 
         width: percentage($i/$grid-columns);

@@ -6,7 +6,7 @@ import { RowProps } from './interface';
 import './Row.scss';
 
 const Row = forwardRef<HTMLDivElement, RowProps>((props, ref) => {
-  const { children, className } = props;
+  const { children, className, style } = props;
   const rowRef = ref;
 
   const prefixCls = 'row';
@@ -19,7 +19,7 @@ const Row = forwardRef<HTMLDivElement, RowProps>((props, ref) => {
   );
 
   return (
-    <div ref={rowRef} className={classNames}>
+    <div ref={rowRef} className={classNames} style={style}>
       {children}
     </div>
   );
