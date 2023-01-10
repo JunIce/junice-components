@@ -1,0 +1,29 @@
+@import "../_style/variables";
+
+.breadcrumb {
+  padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
+  margin-bottom: $line-height-computed;
+  list-style: none;
+  background-color: #fff;
+  border-radius: $border-radius-base;
+
+  >li {
+    display: inline-block;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+
+    +li:before {
+      content: "/\00a0";
+      padding: 0 5px;
+      color: $breadcrumb-color;
+    }
+
+    &:hover:not(.active) {
+      color: #333;
+    }
+  }
+
+  >.active {
+    color: $breadcrumb-active-color;
+  }
+}
