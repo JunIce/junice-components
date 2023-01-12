@@ -91,3 +91,12 @@ export interface TabsProps {
   block?: boolean;
   outline?: boolean;
 }
+
+export interface TabPaneProps {
+  style?: CSSProperties;
+  className?: string | string[];
+  children?: ReactNode;
+
+  key: string;
+  label: string | ReactNode;
+}

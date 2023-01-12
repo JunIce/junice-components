@@ -16,7 +16,7 @@
   >li {
     float: none;
 
-    >a {
+    .tab-pane_label {
       text-align: center;
       margin-bottom: 5px;
     }
@@ -32,7 +32,7 @@
       display: table-cell;
       width: 1%;
 
-      >a {
+      .tab-pane_label {
         margin-bottom: 0;
       }
     }
@@ -42,26 +42,26 @@
 .nav-tabs-justified {
   border-bottom: 0;
 
-  >li>a {
+  >li .tab-pane_label {
     margin-right: 0;
     border-radius: $border-radius-base;
   }
 
-  >.active>a,
-  >.active>a:hover,
-  >.active>a:focus {
+  >.active>.tab-pane_label,
+  >.active>.tab-pane_label:hover,
+  >.active>.tab-pane_label:focus {
     border: 1px solid $nav-tabs-justified-link-border-color;
   }
 
   @media (min-width: $screen-sm-min) {
-    >li>a {
+    >li>.tab-pane_label {
       border-bottom: 1px solid $nav-tabs-justified-link-border-color;
       border-radius: $border-radius-base $border-radius-base 0 0;
     }
 
-    >.active>a,
-    >.active>a:hover,
-    >.active>a:focus {
+    >.active>.tab-pane_label,
+    >.active>.tab-pane_label:hover,
+    >.active>.tab-pane_label:focus {
       border-bottom-color: $nav-tabs-justified-active-link-border-color;
     }
   }
@@ -78,10 +78,11 @@
     position: relative;
     display: block;
 
-    >a {
+    .tab-pane_label {
       position: relative;
       display: block;
       padding: $nav-link-padding;
+      cursor: pointer;
 
       &:hover,
       &:focus {
@@ -91,7 +92,7 @@
     }
 
     // Disabled state sets text to gray and nukes hover/tab effects
-    &.disabled>a {
+    &.disabled>.tab-pane_label {
       color: $nav-disabled-link-color;
 
       &:hover,
@@ -105,7 +106,7 @@
   }
 
   // Open dropdowns
-  .open>a {
+  .open>.tab-pane_label {
 
     &,
     &:hover,
@@ -119,8 +120,6 @@
     @include nav-divider();
   }
 
-  // Prevent IE8 from misplacing imgs
-  //
   // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
   >li>a>img {
     max-width: none;
@@ -141,7 +140,7 @@
     margin-bottom: -1px;
 
     // Actual tabs (as links)
-    >a {
+    .tab-pane_label {
       margin-right: 2px;
       line-height: $line-height-base;
       border: 1px solid transparent;
@@ -153,9 +152,7 @@
       }
     }
 
-    // Active state, and its :hover to override normal :hover
-    &.active>a {
-
+    .tab-pane_label.active {
       &,
       &:hover,
       &:focus {
@@ -168,12 +165,9 @@
     }
   }
 
-  // pulling this in mainly for less shorthand
   &.nav-justified {
     @extend .nav-justified;
     @extend .nav-tabs-justified;
-    // .nav-justified();
-    // .nav-tabs-justified();
   }
 }
 
@@ -185,7 +179,7 @@
     float: left;
 
     // Links rendered as pills
-    >a {
+    .tab-pane_label {
       border-radius: $nav-pills-border-radius;
     }
 
@@ -194,7 +188,7 @@
     }
 
     // Active state
-    &.active>a {
+    &.active>.tab-pane_label {
 
       &,
       &:hover,
@@ -220,17 +214,6 @@
 }
 
 
-// Nav variations
-// --------------------------------------------------
-
-// Justified nav links
-// -------------------------
-
-
-// Tabbable tabs
-// -------------------------
-
-// Hide tabbable panes to start, show them when `.active`
 .tab-content {
   >.tab-pane {
     display: none;
@@ -242,14 +225,8 @@
 }
 
 
-// Dropdowns
-// -------------------------
-
-// Specific dropdowns
 .nav-tabs .dropdown-menu {
-  // make dropdown border overlap tab border
   margin-top: -1px;
-  // Remove the top rounded corners here since there is a hard edge above the menu
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
