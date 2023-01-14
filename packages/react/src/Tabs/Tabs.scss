@@ -236,46 +236,37 @@
 
 
 
-.default {
+.nav-default {
   border-bottom: 2px solid $extralight;
 }
 
-.default li.active a,
-.default li.active a:hover,
-.default li.active a:focus {
+.nav-default .active{
   background: $white;
-  border: 0px;
-  border-bottom: 2px solid $themecolor;
+  border: 0px!important;
+  border-bottom: 2px solid #03a9f3!important;
   margin-bottom: -1px;
-  color: $themecolor;
-}
-
-.default li a,
-.default li a:hover,
-.default li a:focus {
-  border: 0px;
-
+  color: #03a9f3!important;
 }
 
 /*custom tab2*/
-.customtab2 {
-  border-bottom: 1px solid $extralight;
-  border-top: 1px solid $extralight;
-  padding: 10px 0;
-}
+// .customtab2 {
+//   border-bottom: 1px solid $extralight;
+//   border-top: 1px solid $extralight;
+//   padding: 10px 0;
+// }
 
-.customtab2 li.active a,
-.customtab2 li.active a:hover,
-.customtab2 li.active a:focus {
-  background: $themecolor;
-  border: 1px solid $themecolor;
+// .customtab2 li.active a,
+// .customtab2 li.active a:hover,
+// .customtab2 li.active a:focus {
+//   background: $themecolor;
+//   border: 1px solid $themecolor;
 
-  color: $white;
-}
+//   color: $white;
+// }
 
-.customtab2 li a,
-.customtab2 li a:hover,
-.customtab2 li a:focus {
-  border: 0px;
+// .customtab2 li a,
+// .customtab2 li a:hover,
+// .customtab2 li a:focus {
+//   border: 0px;
 
-}
+// }
