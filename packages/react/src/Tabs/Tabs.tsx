@@ -29,6 +29,8 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     prefixCls,
     {
       [`${prefixCls}-tabs`]: true,
+      // [`${prefixCls}-card`]: true,
+      [`${prefixCls}-default`]: true,
     },
     className,
   );
