@@ -1,0 +1,45 @@
+@import "../_style/variables";
+
+.switch {
+  position: relative;
+  outline: none;
+  height: 24px;
+  line-height: 24px;
+  min-width: 40px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color .2s cubic-bezier(.34, .69, .1, 1);
+  padding: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+  overflow: hidden;
+
+
+  &-dot {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $primary;
+    color: $primary;
+    font-size: 12px;
+    transition: all .2s cubic-bezier(.34, .69, .1, 1);
+  }
+
+
+  &.checked {
+    .switch-dot {
+      left: calc(100% - 20px);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
