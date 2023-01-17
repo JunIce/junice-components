@@ -21,3 +21,16 @@ export const type = () => (
     />
   </>
 );
+
+export const style = () => (
+  <>
+    <Switch
+      dotStyle={{
+        backgroundColor: 'red',
+      }}
+      onChange={(e: any) => {
+        console.log(e);
+      }}
+    />
+  </>
+);

@@ -6,7 +6,7 @@ import './Switch.scss';
 import cs from '../_util/classNames';
 
 const Input = forwardRef<null, InputProps>((props, ref) => {
-  const { className, disabled = false, value = '', onChange } = props;
+  const { className, style, dotStyle, disabled = false, value = '', onChange } = props;
 
   const [isChecked, setChecked] = useState(value);
 
@@ -15,17 +15,18 @@ const Input = forwardRef<null, InputProps>((props, ref) => {
     `${prefix}`,
     {
       checked: isChecked,
-      disabled: disabled
+      disabled: disabled,
     },
     className,
   );
   const handleOnChange = (e: any) => {
-    setChecked(!isChecked)
+    if (disabled) return;
+    setChecked(!isChecked);
     onChange && onChange(e);
   };
   return (
-    <button className={classNames} role="button" onClick={handleOnChange}>
-      <div className="switch-dot"></div>
+    <button className={classNames} style={style} role="button" onClick={handleOnChange}>
+      <div className="switch-dot" style={dotStyle}></div>
     </button>
   );
 });
