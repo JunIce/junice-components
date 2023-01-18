@@ -226,6 +226,16 @@
   }
 }
 
+.nav-v {
+  display: table;
+  width: 100%;
+
+  .tab-content {
+    margin-top: 0;
+    padding: 20px;
+  }
+}
+
 
 .tab-content {
   margin-top: 30px;

@@ -1,4 +1,4 @@
-import React, { forwardRef, PropsWithChildren, ReactElement, useState } from 'react';
+import React, { forwardRef, PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 import cs from '../_util/classNames';
 
 import { TabPaneProps, TabsProps } from './interface';
@@ -23,6 +23,12 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const [currentKey, setCurrentKey] = useState('');
 
   const paneChildren = getPaneChildren({ children });
+
+  useEffect(() => {
+    if (children[0]?.key) {
+      setCurrentKey(children[0].key);
+    }
+  }, []);
 
   const prefixCls = 'nav';
   const classNames = cs(
@@ -63,13 +69,9 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     </ul>
   );
 
-  const contentCls = cs(
-    "tab-content",
-    {
-      [`${prefixCls}-vertical`]: vertical,
-    },
-  );
-
+  const contentCls = cs('tab-content', {
+    [`${prefixCls}-vertical`]: vertical,
+  });
 
   const tabContent = (
     <div className="tab-content">
@@ -86,8 +88,12 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     </div>
   );
 
+  const tabsCls = cs({
+    [`${prefixCls}-v`]: vertical,
+  });
+
   return (
-    <div ref={tabsRef}>
+    <div ref={tabsRef} className={tabsCls}>
       {tabHeader}
       {tabContent}
     </div>
