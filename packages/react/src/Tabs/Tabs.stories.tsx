@@ -44,6 +44,24 @@ export const basic = () => {
             </div>
           </Tabs.TabPane>
         </Tabs>
+
+        <Tabs type='card' vertical>
+          <Tabs.TabPane key="home" label="home">
+            <div>
+              <h3>home</h3>
+            </div>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="profile" label="profile">
+            <div>
+              <h3>profile</h3>
+            </div>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="messages" label="messages">
+            <div>
+              <h3>messages</h3>
+            </div>
+          </Tabs.TabPane>
+        </Tabs>
       </div>
     </>
   );

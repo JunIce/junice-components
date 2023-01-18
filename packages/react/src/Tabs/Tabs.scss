@@ -4,7 +4,7 @@
 
 @mixin nav-divider($color: #e5e5e5) {
   height: 1px;
-  margin: (($line-height-computed / 2) - 1) 0;
+  margin: calc($line-height-computed / 2);
   overflow: hidden;
   background-color: $color;
 }
@@ -170,8 +170,20 @@
     @extend .nav-justified;
     @extend .nav-tabs-justified;
   }
-}
 
+  &.nav-vertical {
+    width: 150px;
+    border-right: 1px solid $border;
+    display: table-cell;
+    vertical-align: top;
+
+    li {
+      color: $dark;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}
 
 // Pills
 // -------------------------
@@ -218,6 +230,11 @@
 .tab-content {
   margin-top: 30px;
 
+  &.nav-vertical {
+    display: table-cell;
+    vertical-align: top;
+  }
+
   >.tab-pane {
     display: none;
   }
@@ -240,12 +257,12 @@
   border-bottom: 2px solid $extralight;
 }
 
-.nav-default .active{
+.nav-default .active {
   background: $white;
-  border: 0px!important;
-  border-bottom: 2px solid #03a9f3!important;
+  border: 0px !important;
+  border-bottom: 2px solid #03a9f3 !important;
   margin-bottom: -1px;
-  color: #03a9f3!important;
+  color: #03a9f3 !important;
 }
 
 /*custom tab2*/

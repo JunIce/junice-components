@@ -14,6 +14,7 @@ export interface TabsProps {
   type?: 'card';
 
   size?: 'mini' | 'small' | 'default' | 'large';
+  vertical?: boolean;
 
   onClick?: (e: Event) => void;
 }

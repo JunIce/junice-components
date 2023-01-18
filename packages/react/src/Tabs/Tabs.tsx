@@ -17,7 +17,7 @@ const getPaneChildren = (props: TabsProps) => {
 };
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
-  const { children, className, style } = props;
+  const { children, className, style, vertical } = props;
   const tabsRef = ref;
 
   const [currentKey, setCurrentKey] = useState('');
@@ -31,11 +31,10 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
       [`${prefixCls}-tabs`]: true,
       // [`${prefixCls}-card`]: true,
       [`${prefixCls}-default`]: true,
+      [`${prefixCls}-vertical`]: vertical,
     },
     className,
   );
-
-  console.log(paneChildren);
 
   const tabHeader = (
     <ul className={classNames} role="tablist">
@@ -63,6 +62,14 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
       })}
     </ul>
   );
+
+  const contentCls = cs(
+    "tab-content",
+    {
+      [`${prefixCls}-vertical`]: vertical,
+    },
+  );
+
 
   const tabContent = (
     <div className="tab-content">
