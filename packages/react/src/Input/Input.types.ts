@@ -4,7 +4,8 @@ export interface InputProps {
   style?: CSSProperties;
   className?: string | string[];
 
-  type?: 'text' | 'file' | 'textarea';
+  type?: 'text' | 'file' | 'textarea' | 'password';
+  rows?: number;
   disabled?: boolean;
   value?: any;
   placeholder?: string;

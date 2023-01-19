@@ -14,6 +14,14 @@ export const type = () => (
         console.log(e);
       }}
     />
+
+    <Input
+      type="textarea"
+      placeholder="working input"
+      onChange={(e: any) => {
+        console.log(e);
+      }}
+    />
   </>
 );
 
