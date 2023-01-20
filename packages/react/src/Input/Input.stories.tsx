@@ -15,6 +15,8 @@ export const type = () => (
       }}
     />
 
+    <Input type="password" value="123456" />
+
     <Input
       type="textarea"
       placeholder="working input"
