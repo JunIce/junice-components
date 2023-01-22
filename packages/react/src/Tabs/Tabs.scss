@@ -230,6 +230,25 @@
   display: table;
   width: 100%;
 
+  .nav-tabs {
+    margin-bottom: unset;
+  }
+
+  li {
+    margin-bottom: unset;
+  }
+
+  li .tab-pane_label {
+    border-radius: unset;
+    margin-right: unset;
+  }
+  li .tab-pane_label.active {
+    color: #fff!important;
+    background-color: #03a9f3;
+    border-bottom: unset;
+    border-radius: unset;
+  }
+
   .tab-content {
     margin-top: 0;
     padding: 20px;
