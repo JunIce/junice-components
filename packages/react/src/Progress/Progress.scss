@@ -50,15 +50,18 @@
 }
 
 // Striped bars
-//
+$color: rgba(255,255,255,.15);
+@mixin striped {
+  background-image: linear-gradient(45deg, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}
 // `.progress-striped .progress-bar` is deprecated as of v3.2.0 in favor of the
 // `.progress-bar-striped` class, which you just add to an existing
 // `.progress-bar`.
-// .progress-striped .progress-bar,
-// .progress-bar-striped {
-//   #gradient>.striped();
-//   background-size: 40px 40px;
-// }
+.progress-striped .progress-bar,
+.progress-bar-striped {
+  @include striped();
+  background-size: 40px 40px;
+}
 
 // Call animation for the active one
 //
