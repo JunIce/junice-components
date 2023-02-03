@@ -30,7 +30,7 @@ export interface BaseButtonProps {
    * @en Size of the button
    * @defaultValue default
    */
-  size?: 'mini' | 'small' | 'default' | 'large';
+  size?: 'small' | 'medium' | 'large';
   /**
    * @zh 按钮形状，`circle` - 圆形， `round` - 全圆角， `square` - 长方形
    * @en Three button shapes are available: `circle`, `round` and `square`
@@ -90,32 +90,8 @@ export interface BaseButtonProps {
 
   block?: boolean;
   outline?: boolean;
-}
-
-export type AnchorButtonProps = {
-  href: string;
-  target?: string;
-  anchorProps?: HTMLProps<HTMLAnchorElement>;
-} & BaseButtonProps &
-  Omit<AnchorHTMLAttributes<any>, 'type' | 'onClick' | 'className'>;
-
-export type FinalButtonProps = {
-  /**
-   * @zh 按钮原生的 html type 类型
-   * @en html button type
-   * @defaultValue button
-   */
-  htmlType?: 'button' | 'submit' | 'reset';
-} & BaseButtonProps &
-  Omit<ButtonHTMLAttributes<any>, 'type' | 'onClick' | 'className'>;
-
-/**
- * @title Button
- */
-export type ButtonProps = Partial<FinalButtonProps & AnchorButtonProps>;
-
-export interface ButtonGroupProps {
-  style?: CSSProperties;
-  className?: string | string[];
-  children?: ReactNode;
+  striped?: boolean;
+  value?: number;
+  active?: boolean;
+  showProgress?: boolean;
 }

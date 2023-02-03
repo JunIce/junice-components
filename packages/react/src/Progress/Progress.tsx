@@ -9,6 +9,7 @@ const Progress = forwardRef<null, BaseButtonProps>((props, ref) => {
   const {
     children,
     size,
+    value = 0,
     loading,
     className,
     type,
@@ -16,6 +17,9 @@ const Progress = forwardRef<null, BaseButtonProps>((props, ref) => {
     disabled,
     outline = false,
     block = false,
+    striped = false,
+    active = false,
+    showProgress,
     onClick,
   } = props;
   const buttonRef = ref;
@@ -25,15 +29,29 @@ const Progress = forwardRef<null, BaseButtonProps>((props, ref) => {
   const classNames = cs(
     `${prefixCls}-bar`,
     {
-      [`${prefixCls}-block`]: block
+      [`${prefixCls}-block`]: block,
+      [`${prefixCls}-bar-striped`]: striped,
     },
     className,
   );
 
+  const renderChildren = () => {
+    if (children) return children;
+    if (showProgress) return `${value}%`;
+    return <span className="sr-only">{value}% Complete</span>;
+  };
+
   return (
-    <div className={prefixCls}>
-      <div className={classNames} style={{ width: '60%' }} role="progressbar">
-        <span className="sr-only">60% Complete</span>{' '}
+    <div
+      className={cs(prefixCls, {
+        [`${prefixCls}-sm`]: size == 'small',
+        [`${prefixCls}-md`]: size == 'medium',
+        [`${prefixCls}-lg`]: size == 'large',
+        active,
+      })}
+    >
+      <div className={classNames} style={{ width: `${value}%` }} role="progressbar">
+        {renderChildren()}
       </div>
     </div>
   );

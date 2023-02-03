@@ -7,11 +7,30 @@ export default {
 
 export const basic = () => (
   <>
-    <Progress type="default">default</Progress>
-    <Progress type="info">info</Progress>
-    <Progress type="primary">primary</Progress>
-    <Progress type="success">success</Progress>
-    <Progress type="danger">danger</Progress>
-    <Progress type="warning">warning</Progress>
+    <Progress type="default" value={50}></Progress>
+    <Progress type="info" value={50}></Progress>
+    <Progress type="primary" value={50}></Progress>
+    <Progress type="success" value={50}></Progress>
+    <Progress type="danger" value={50}></Progress>
+    <Progress type="warning" value={50}></Progress>
+  </>
+);
+export const size = () => (
+  <>
+    <Progress type="info" size="small" value={50}></Progress>
+    <Progress type="info" value={50}></Progress>
+    <Progress type="info" size="medium" showProgress value={50}></Progress>
+    <Progress type="info" size="large" value={50}></Progress>
+  </>
+);
+export const striped = () => (
+  <>
+    <Progress type="info" striped value={50}></Progress>
+  </>
+);
+
+export const stripeAnimate = () => (
+  <>
+    <Progress type="info" size="large" striped active value={50}></Progress>
   </>
 );
