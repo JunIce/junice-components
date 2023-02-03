@@ -94,4 +94,6 @@ export interface BaseButtonProps {
   value?: number;
   active?: boolean;
   showProgress?: boolean;
+  vertical?: boolean;
+  fromBottom?: boolean;
 }

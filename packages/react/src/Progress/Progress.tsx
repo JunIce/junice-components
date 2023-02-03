@@ -19,6 +19,8 @@ const Progress = forwardRef<null, BaseButtonProps>((props, ref) => {
     block = false,
     striped = false,
     active = false,
+    vertical = false,
+    fromBottom = false,
     showProgress,
     onClick,
   } = props;
@@ -41,16 +43,25 @@ const Progress = forwardRef<null, BaseButtonProps>((props, ref) => {
     return <span className="sr-only">{value}% Complete</span>;
   };
 
+  const progressStyle: Record<string, any> = {};
+  if (vertical || fromBottom) {
+    progressStyle.height = `${value}%`;
+  } else {
+    progressStyle.width = `${value}%`;
+  }
+
   return (
     <div
       className={cs(prefixCls, {
         [`${prefixCls}-sm`]: size == 'small',
         [`${prefixCls}-md`]: size == 'medium',
         [`${prefixCls}-lg`]: size == 'large',
+        [`${prefixCls}-vertical`]: vertical,
+        [`${prefixCls}-vertical-bottom`]: fromBottom,
         active,
       })}
     >
-      <div className={classNames} style={{ width: `${value}%` }} role="progressbar">
+      <div className={classNames} style={progressStyle} role="progressbar">
         {renderChildren()}
       </div>
     </div>

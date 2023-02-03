@@ -34,3 +34,10 @@ export const stripeAnimate = () => (
     <Progress type="info" size="large" striped active value={50}></Progress>
   </>
 );
+
+export const bottom = () => (
+  <>
+    <Progress type="info" size="large" vertical striped active value={50}></Progress>
+    <Progress type="info" size="large" fromBottom striped active value={50}></Progress>
+  </>
+);
