@@ -1,0 +1,16 @@
+@import "transition.css";
+
+:root {
+  --demoblock-border: var(--vp-c-divider);
+  --demoblock-control: #909399;
+  --demoblock-control-bg: var(--vp-c-bg);
+}
+
+html.dark {
+  --demoblock-control: #A3A6AD;
+}
+
+
+.demoblock-view {
+    background-color: #fff;
+}

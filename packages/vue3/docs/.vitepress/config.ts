@@ -6,16 +6,20 @@ import path from 'path';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'vue3-docs',
-  description: 'A VitePress Site111',
+  description: 'Vue3 Components Documentation',
   lastUpdated: true,
   markdown: {
     lineNumbers: true,
+    theme: 'material-theme-palenight',
+    config: (md) => {
+      md.use(demoblockPlugin);
+    },
   },
   vite: {
-    plugins: [ demoblockVitePlugin(), vueJsx() ],
+    plugins: [demoblockVitePlugin(), vueJsx()],
     resolve: {
       alias: {
-        '@alias': path.resolve(__dirname, '../'),
+        '@': path.resolve(__dirname, '../../src'),
       },
     },
   },
@@ -23,13 +27,13 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      // { text: 'Examples', link: '/markdown-examples' },
     ],
 
     sidebar: [
       {
         text: '组件',
-        items: [{ text: 'Form', link: '/form' }],
+        items: [{ text: 'Form', link: '/components/element-plus/form' }],
       },
     ],
 

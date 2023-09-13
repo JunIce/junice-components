@@ -4,15 +4,15 @@ layout: home
 
 hero:
   name: "vue3-docs"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  text: "Vue3 Components"
+  # tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Components
+      link: /components/element-plus/form
+    # - theme: alt
+    #   text: API Examples
+    #   link: /api-examples
 
 # features:
 #   - title: Feature A

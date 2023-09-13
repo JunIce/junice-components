@@ -1,18 +1,14 @@
 import Theme from 'vitepress/theme'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-
 import { useComponents } from './usingComponents'
-
-
-console.log('dddddddd');
+// style
+import "../style/index.css"
 
 export default {
   ...Theme,
-
+  theme: 'material-theme-palenight',
+  lineNumbers: true,
   enhanceApp(ctx) {
     Theme.enhanceApp(ctx)
-    ctx.app.use(ElementPlus)
     useComponents(ctx.app)
   }
 }
