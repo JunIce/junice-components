@@ -10,7 +10,7 @@ jobs:
       uses: actions/checkout@main
 
     - name: install
-      run: cd packages/vue3 && yarn bootstrap
+      run: cd packages/vue3 && yarn install
 
     - name: build:docs
       run: yarn build:docs
