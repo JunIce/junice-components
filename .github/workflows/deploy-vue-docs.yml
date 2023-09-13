@@ -10,16 +10,16 @@ jobs:
       uses: actions/checkout@main
 
     - name: install
-      run: yarn bootstrap
+      run: cd packages/vue3 && yarn bootstrap
 
     - name: build:docs
       run: yarn build:docs
 
     - name: deploy
-      uses: genietim/ftp-action@releases/v4
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USER }}
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        localDir: "./packages/vue3/doc-dist"
-        remoteDir: "docs"
+        local-dir: "./packages/vue3/doc-dist/"
+        server-dir: "./docs/"
