@@ -13,7 +13,7 @@ jobs:
       run: cd packages/vue3 && yarn install
 
     - name: build:docs
-      run: yarn build:docs
+      run: cd packages/vue3 && yarn docs:build
 
     - name: deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
