@@ -8,6 +8,7 @@ export default defineConfig({
   title: 'vue3-docs',
   description: 'Vue3 Components Documentation',
   lastUpdated: true,
+  outDir: "../doc-dist",
   markdown: {
     lineNumbers: true,
     theme: 'material-theme-palenight',
@@ -37,6 +38,6 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/JunIce/junice-components' }],
   },
 });

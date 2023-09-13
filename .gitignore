@@ -17,6 +17,6 @@ package-lock.json
 /packages/*/lib/
 /packages/*/native/
 /packages/*/types/
-
+/packages/*/doc-dist
 # test coverage
 /packages/*/coverage/
