@@ -34,7 +34,10 @@ export default defineConfig({
     sidebar: [
       {
         text: '组件',
-        items: [{ text: 'Form', link: '/components/element-plus/form' }],
+        items: [
+          { text: 'Form', link: '/components/element-plus/form' },
+          { text: 'SelectTree', link: '/components/element-plus/select-tree' }
+        ],
       },
     ],
 
