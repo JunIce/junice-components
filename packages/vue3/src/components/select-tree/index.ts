@@ -1,5 +1,6 @@
 import { ElInput, ElPopover, ElTree } from "element-plus"
-import { computed, defineComponent, h, onMounted, ref } from "vue"
+import { defineComponent, h, nextTick, onMounted, ref, watch, withDirectives } from "vue"
+import { ClickOutside as vClickOutside } from 'element-plus'
 
 const SelectTree = defineComponent({
     props: {
@@ -8,7 +9,7 @@ const SelectTree = defineComponent({
             default: false
         },
         modelValue: {
-            type: [String, Array,]
+            type: Array
         },
         popoverProps: {
             type: Object,
@@ -38,6 +39,17 @@ const SelectTree = defineComponent({
             treeInstance: () => treeRef.value
         })
 
+        watch(() => props.modelValue, () => {
+            if ((props.modelValue || [])?.length > 0) {
+                nextTick(() => {
+                    const nodes = props.modelValue?.map(key => treeRef.value?.getNode(key as string))
+                    treeRef.value?.setCheckedNodes(nodes as any[], false)
+                })
+            }
+        }, {
+            immediate: true
+        })
+
         return () => {
             return h('div', {}, [
                 h(ElPopover, {
@@ -53,18 +65,21 @@ const SelectTree = defineComponent({
                         data: props.treeData,
                         onNodeClick: (e: any) => {
                             selectedNode.value = e
-                            toggleVisible()
-                            emit('update:modelValue', e)
+                            popoverVisible.value = false
+                            emit('update:modelValue', [e[props.treeProps.nodeKey]])
                         }
                     }),
-                    reference: () => h(ElInput, {
-                        ref: inputRef,
-                        readonly: true,
-                        value: selectedNode.value?.label,
-                        onClick: () => {
-                            toggleVisible()
-                        }
-                    })
+                    reference: () =>
+                        withDirectives(h(ElInput, {
+                            ref: inputRef,
+                            readonly: true,
+                            value: selectedNode.value?.label,
+                            onClick: () => {
+                                toggleVisible()
+                            }
+                        }), [
+                            [vClickOutside, () => popoverVisible.value = false]
+                        ])
                 })
             ])
         }
