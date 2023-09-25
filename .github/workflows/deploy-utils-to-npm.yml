@@ -38,5 +38,6 @@ jobs:
 
     - uses: JS-DevTools/npm-publish@v2
       with:
-        package: "./packages/utils/"
+        package: ./packages/utils/
         token: ${{ secrets.NPM_TOKEN }}
+        strategy: all
