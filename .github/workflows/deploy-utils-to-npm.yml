@@ -31,7 +31,7 @@ jobs:
           ${{ runner.os }}-pnpm-store-
 
     - name: install
-      run: pnpm i
+      run: pnpm install --no-frozen-lockfile
 
     - name: build:utils
       run: pnpm --filter utils build

@@ -188,6 +188,15 @@ importers:
         specifier: ^4.8.4
         version: 4.8.4
 
+  packages/utils:
+    devDependencies:
+      typescript:
+        specifier: ^4.6.4
+        version: 4.9.5
+      vite:
+        specifier: ^3.0.7
+        version: 3.0.7
+
   packages/vue2:
     dependencies:
       core-js:
@@ -8517,7 +8526,7 @@ packages:
       source-map: 0.6.1
       vue-template-es2015-compiler: 1.9.1
     optionalDependencies:
-      prettier: 2.3.2
+      prettier: 2.8.8
     transitivePeerDependencies:
       - arc-templates
       - atpl
