@@ -41,3 +41,4 @@ jobs:
         package: ./packages/utils/
         token: ${{ secrets.NPM_TOKEN }}
         strategy: all
+        access: public
