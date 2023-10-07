@@ -28,18 +28,20 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      // { text: 'Examples', link: '/markdown-examples' },
+      { text: 'Type Challenges', link: '/type-challenges' },
     ],
 
-    sidebar: [
-      {
-        text: '组件',
-        items: [
-          { text: 'Form', link: '/components/element-plus/form' },
-          { text: 'SelectTree', link: '/components/element-plus/select-tree' }
-        ],
-      },
-    ],
+    sidebar: {
+      '/components/': [
+        {
+          text: '组件',
+          items: [
+            { text: 'Form', link: '/components/element-plus/form' },
+            { text: 'SelectTree', link: '/components/element-plus/select-tree' }
+          ],
+        },
+      ]
+    },
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/JunIce/junice-components' }],
   },
