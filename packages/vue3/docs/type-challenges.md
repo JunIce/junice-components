@@ -96,3 +96,116 @@ Implement a generic `MyReadonly2<T, K>` which takes two type argument `T` and `K
 ```typescript
 type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> & { readonly [Key in K]: T[Key] }
 ```
+
+## 00009-medium-deep-readonly
+
+Implement a generic `DeepReadonly<T>` which make every parameter of an object - and its sub-objects recursively - readonly.
+
+You can assume that we are only dealing with Objects in this challenge. Arrays, Functions, Classes and so on do not need to be taken into consideration. However, you can still challenge yourself by covering as many different cases as possible.
+
+```typescript
+type DeepReadonly<T> = {
+  readonly [k in keyof T]: T[k] extends never | (() => any) ? T[k] : DeepReadonly<T[k]>
+}
+
+```
+
+## 00010-medium-tuple-to-union
+
+```ts
+type Arr = ['1', '2', '3']
+
+type Test = TupleToUnion<Arr> // expected to be '1' | '2' | '3'
+```
+
+```typescript
+type TupleToUnion<T> = T extends Array<infer V> ? V : never
+```
+
+## 00011-easy-tuple-to-object
+
+
+For example:
+
+```ts
+const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+
+type result = TupleToObject<typeof tuple> // expected { 'tesla': 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
+```
+
+```ts
+type TupleToObject<T extends readonly any[]> = {
+  [k in T[number]]: k
+}
+```
+
+
+## 00012-medium-chainable-options
+
+For example
+
+```ts
+declare const config: Chainable
+
+const result = config
+  .option('foo', 123)
+  .option('name', 'type-challenges')
+  .option('bar', { value: 'Hello World' })
+  .get()
+
+// expect the type of result to be:
+interface Result {
+  foo: number
+  name: string
+  bar: {
+    value: string
+  }
+}
+```
+
+```ts
+type Chainable<T extends {}> = {
+  option<K extends string, V>(key: K, value: V): Chainable<Omit<T, K> & { [k in K]: V }>
+  get(): T
+}
+```
+
+
+## 00013-warm-hello-world
+
+```ts
+type HelloWorld = string // expected to be a string
+```
+
+## 00014-easy-first
+
+For example:
+
+```ts
+type arr1 = ['a', 'b', 'c']
+type arr2 = [3, 2, 1]
+
+type head1 = First<arr1> // expected to be 'a'
+type head2 = First<arr2> // expected to be 3
+```
+
+```ts
+type First<T extends any[]> = T extends [infer F, ...any[]] ? F : never
+```
+
+## 00015-medium-last
+
+
+For example
+
+```ts
+type arr1 = ['a', 'b', 'c']
+type arr2 = [3, 2, 1]
+
+type tail1 = Last<arr1> // expected to be 'c'
+type tail2 = Last<arr2> // expected to be 1
+```
+
+```ts
+type Last<T extends any[]> = T extends [infer F, ...infer Rest] ? Rest extends [] ? F : Last<Rest> : never
+```
