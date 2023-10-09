@@ -209,3 +209,99 @@ type tail2 = Last<arr2> // expected to be 1
 ```ts
 type Last<T extends any[]> = T extends [infer F, ...infer Rest] ? Rest extends [] ? F : Last<Rest> : never
 ```
+
+## 00016-medium-pop
+
+
+Implement a generic `Pop<T>` that takes an Array `T` and returns an Array without it's last element.
+
+For example
+
+```ts
+type arr1 = ['a', 'b', 'c', 'd']
+type arr2 = [3, 2, 1]
+
+type re1 = Pop<arr1> // expected to be ['a', 'b', 'c']
+type re2 = Pop<arr2> // expected to be [3, 2]
+```
+
+
+```ts
+type Pop<T extends any[]> = T extends [...infer Rest, infer Last] ? Rest : []
+```
+
+
+
+## 00017-hard-currying-1
+
+
+```ts
+const add = (a: number, b: number) => a + b
+const three = add(1, 2)
+
+const curriedAdd = Currying(add)
+const five = curriedAdd(2)(3)
+```
+
+The function passed to `Currying` may have multiple arguments, you need to correctly type it.
+
+```ts
+type Curry<P, R> = P extends [infer H, ...infer T] ? (p: H) => Curry<T, R> : R
+
+declare function Currying<T extends Function>(fn: T): T extends (...args: infer Arg) => infer Return
+  ? Arg extends never[]
+    ? () => Return
+    : Curry<Arg, Return>
+  : never
+
+```
+
+
+## 00018-easy-tuple-length
+
+For given a tuple, you need create a generic `Length`, pick the length of the tuple
+
+For example:
+
+```ts
+type tesla = ['tesla', 'model 3', 'model X', 'model Y']
+type spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT']
+
+type teslaLength = Length<tesla>  // expected 4
+type spaceXLength = Length<spaceX> // expected 5
+```
+
+```ts
+type Length<T> = T extends readonly unknown[] ? T['length'] : never
+```
+
+## 00020-medium-promise-all
+
+Type the function `PromiseAll` that accepts an array of PromiseLike objects, the returning value should be `Promise<T>` where `T` is the resolved result array.
+
+```ts
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise<string>((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+// expected to be `Promise<[number, 42, string]>`
+const p = PromiseAll([promise1, promise2, promise3] as const)
+```
+
+```ts
+// 手写Awaited<T>
+type MyAwaited1<T> =
+  T extends null | undefined
+    ? T
+    : T extends object & { then: (fulfilled: infer U) => any }
+      ? U extends (value: infer F, ...args: any) => any
+        ? F
+        : never
+      : T
+
+declare function PromiseAll<T extends readonly unknown[] | []>(values: T): Promise<{
+  -readonly [K in keyof T]: MyAwaited1<T[K]>
+}>
+```
