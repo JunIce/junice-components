@@ -399,3 +399,20 @@ type MyDogType = LookUp<Cat | Dog, 'dog'> // expected to be `Dog`
 ```ts
 type LookUp<U, T> = U extends { type: T } ? U : never
 ```
+
+## 00089-hard-required-keys
+
+Implement the advanced util type `RequiredKeys<T>`, which picks all the required keys into a union.
+
+For example
+
+```ts
+type Result = RequiredKeys<{ foo: number; bar?: string }>;
+// expected to be “foo”
+```
+
+```ts
+type RequiredKeys<T> = keyof {
+  [K in keyof T as T[K] extends Required<T>[K] ? K : never]: T[K]
+}
+```
