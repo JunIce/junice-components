@@ -305,3 +305,97 @@ declare function PromiseAll<T extends readonly unknown[] | []>(values: T): Promi
   -readonly [K in keyof T]: MyAwaited1<T[K]>
 }>
 ```
+
+## 00043-easy-exclude
+
+Implement the built-in `Exclude<T, U>`
+
+> Exclude from `T` those types that are assignable to `U`
+
+For example:
+
+```ts
+type Result = MyExclude<'a' | 'b' | 'c', 'a'> // 'b' | 'c'
+```
+
+```ts
+type MyExclude<T, U> = T extends U ? never : T
+```
+
+
+## 00055-hard-union-to-intersection
+
+Implement the advanced util type `UnionToIntersection<U>`
+
+For example
+
+```ts
+type I = UnionToIntersection<'foo' | 42 | true> // expected to be 'foo' & 42 & true
+```
+
+
+```ts
+// 触发分派 > 函数参数交叉
+type UnionToIntersection<U> = (U extends U ? (args: U) => never : never) extends (args: infer V) => never ? V : never
+```
+
+
+## 00057-hard-get-required
+
+Implement the advanced util type `GetRequired<T>`, which remains all the required fields
+
+For example
+
+```ts
+type I = GetRequired<{ foo: number, bar?: string }> // expected to be { foo: number }
+```
+
+
+```ts
+type GetRequired<T> = {
+  [K in keyof T as T[K] extends { [K in keyof T]-?: T[K] }[K] ? K : never ]: T[K]
+}
+```
+
+
+## 00057-hard-get-required
+
+Implement the advanced util type `GetOptional<T>`, which remains all the optional fields
+
+For example
+
+```ts
+type I = GetOptional<{ foo: number, bar?: string }> // expected to be { bar?: string }
+```
+
+
+```ts
+type GetOptional<T> = {
+  [K in keyof T as T[K] extends { [K in keyof T]-?: T[K] }[K] ? never : K ]: T[K]
+}
+```
+
+## 00062-medium-type-lookup
+
+Sometimes, you may want to look up a type in a union by its attributes.
+
+In this challenge, we would like to get the corresponding type by searching for the common `type` field in the union `Cat | Dog`. In other words, we will expect to get `Dog` for `LookUp<Dog | Cat, 'dog'>` and `Cat` for `LookUp<Dog | Cat, 'cat'>` in the following example.
+
+```ts
+interface Cat {
+  type: 'cat'
+  breeds: 'Abyssinian' | 'Shorthair' | 'Curl' | 'Bengal'
+}
+
+interface Dog {
+  type: 'dog'
+  breeds: 'Hound' | 'Brittany' | 'Bulldog' | 'Boxer'
+  color: 'brown' | 'white' | 'black'
+}
+
+type MyDogType = LookUp<Cat | Dog, 'dog'> // expected to be `Dog`
+```
+
+```ts
+type LookUp<U, T> = U extends { type: T } ? U : never
+```
