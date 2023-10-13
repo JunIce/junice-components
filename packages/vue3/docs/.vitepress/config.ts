@@ -37,6 +37,7 @@ export default defineConfig({
           text: '组件',
           items: [
             { text: 'Form', link: '/components/element-plus/form' },
+            { text: 'Select', link: '/components/element-plus/select' },
             { text: 'SelectTree', link: '/components/element-plus/select-tree' }
           ],
         },
