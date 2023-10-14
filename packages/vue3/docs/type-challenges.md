@@ -416,3 +416,107 @@ type RequiredKeys<T> = keyof {
   [K in keyof T as T[K] extends Required<T>[K] ? K : never]: T[K]
 }
 ```
+
+## 00090-hard-optional-keys
+
+Implement the advanced util type `OptionalKeys<T>`, which picks all the optional keys into a union.
+
+```ts
+type OptionalKeys<T> = keyof {
+  [K in keyof T as T[K] extends Required<T>[K] ? never : K]: never
+}
+```
+
+
+
+## 00106-medium-trimleft
+
+````ts
+Implement `TrimLeft<T>` which takes an exact string type and returns a new string with the whitespace beginning removed.
+
+For example
+
+```ts
+type trimed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
+```
+````
+
+
+
+```ts
+type WhiteSpace = ' ' | '\t' | '\n'
+type TrimLeft<S extends string> = S extends `${WhiteSpace}${infer Rest}` ? TrimLeft<Rest> : S
+```
+
+
+
+## 00108-medium-trim
+
+Implement `Trim<T>` which takes an exact string type and returns a new string with the whitespace from both ends removed.
+
+
+
+For example
+
+```ts
+type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
+```
+
+
+
+```ts
+type WhiteSpace = ' ' | '\t' | '\n'
+type Trim<S extends string> = S extends `${WhiteSpace}${infer T}` | `${infer T}${WhiteSpace}` ? Trim<T> : S
+```
+
+
+
+## 00110-medium-capitalize
+
+Implement `Capitalize<T>` which converts the first letter of a string to uppercase and leave the rest as-is.
+
+
+
+For example
+
+```ts
+type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
+```
+
+
+
+```ts
+type MyCapitalize<S extends string> = S extends `${infer F}${infer R}`
+  ? `${Uppercase<F>}${R}`
+  : S
+```
+
+
+
+## 00112-hard-capitalizewords
+
+
+
+Implement `CapitalizeWords<T>` which converts the first letter of ***\*each word of a string\**** to uppercase and leaves the rest as-is.
+
+
+
+For example
+
+```ts
+type capitalized = CapitalizeWords<'hello world, my friends'> // expected to be 'Hello World, My Friends'
+```
+
+
+
+```ts
+type CapitalizeWords<
+  S extends string,
+  W extends string = '',
+> = S extends `${infer A}${infer B}`
+  ? Uppercase<A> extends Lowercase<A>
+    ? `${Capitalize<`${W}${A}`>}${CapitalizeWords<B>}`
+    : CapitalizeWords<B, `${W}${A}`>
+  : Capitalize<W>
+```
+
