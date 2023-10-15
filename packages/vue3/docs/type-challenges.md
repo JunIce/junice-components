@@ -520,3 +520,57 @@ type CapitalizeWords<
   : Capitalize<W>
 ```
 
+
+
+## 00114-hard-camelcase
+
+Implement `CamelCase<T>` which converts `snake_case` string to `camelCase`.
+
+
+
+For example
+
+
+
+```ts
+type camelCase1 = CamelCase<'hello_world_with_types'> // expected to be 'helloWorldWithTypes'
+
+type camelCase2 = CamelCase<'HELLO_WORLD_WITH_TYPES'> // expected to be same as previous one
+```
+
+
+
+```ts
+type CamelCase<S extends string> = S extends Lowercase<S> ?
+  S extends `${infer F}_${infer RF}${infer R}`
+    ? RF extends Uppercase<RF>
+      ? `${F}_${CamelCase<`${RF}${R}`>}`
+      : `${F}${Uppercase<RF>}${CamelCase<R>}`
+    : S
+  : CamelCase<Lowercase<S>>
+```
+
+
+
+## 00116-medium-replace
+
+
+
+Implement `Replace<S, From, To>` which replace the string `From` with `To` once in the given string `S`
+
+
+
+For example
+
+
+
+```ts
+type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
+```
+
+
+
+```ts
+type Replace<S extends string, From extends string, To extends string> = From extends '' ? S : S extends `${infer L}${From}${infer A}` ? `${L}${To}${A}` : S
+```
+
