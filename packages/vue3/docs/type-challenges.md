@@ -574,3 +574,152 @@ type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 't
 type Replace<S extends string, From extends string, To extends string> = From extends '' ? S : S extends `${infer L}${From}${infer A}` ? `${L}${To}${A}` : S
 ```
 
+
+
+
+
+## 00119-medium-replaceall
+
+Implement `ReplaceAll<S, From, To>` which replace the all the substring `From` with `To` in the given string `S`
+
+
+
+For example
+
+
+
+```ts
+type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
+```
+
+
+
+```ts
+type ReplaceAll<S extends string, From extends string, To extends string> =
+  From extends '' ? S
+    : S extends `${infer A}${From}${infer B}` ? `${A}${To}${ReplaceAll<B, From, To>}` : S
+```
+
+
+
+## 00147-hard-c-printf-parser
+
+
+
+
+There is a function in C language: `printf`. This function allows us to print something with formatting. Like this:
+
+```c
+printf("The result is %d.", 42);
+```
+
+This challenge requires you to parse the input string and extract the format placeholders like `%d` and `%f`. For example, if the input string is `"The result is %d."`, the parsed result is a tuple `['dec']`.
+
+Here is the mapping:
+
+```typescript
+type ControlsMap = {
+  c: 'char',
+  s: 'string',
+  d: 'dec',
+  o: 'oct',
+  h: 'hex',
+  f: 'float',
+  p: 'pointer',
+}
+```
+
+
+
+```ts
+type ControlsMap = {
+  c: 'char'
+  s: 'string'
+  d: 'dec'
+  o: 'oct'
+  h: 'hex'
+  f: 'float'
+  p: 'pointer'
+}
+type ParsePrintFormat<PrintFS, Res extends string[] = []> =
+  PrintFS extends `%${infer F extends keyof ControlsMap}${infer R}`
+    ? ParsePrintFormat<R, [...Res, ControlsMap[F]]>
+    : PrintFS extends `%%${infer R}`
+      ? ParsePrintFormat<R, Res>
+      : PrintFS extends `${string}${infer R}`
+        ? ParsePrintFormat<R, Res>
+        : Res
+```
+
+
+
+
+
+## 00151-extreme-query-string-parser
+
+
+You're required to implement a type-level parser to parse URL query string into a object literal type.
+
+Some detailed requirements:
+
+- Value of a key in query string can be ignored but still be parsed to `true`. For example, `'key'` is without value, so the parser result is `{ key: true }`.
+- Duplicated keys must be merged into one. If there are different values with the same key, values must be merged into a tuple type.
+- When a key has only one value, that value can't be wrapped into a tuple type.
+- If values with the same key appear more than once, it must be treated as once. For example, `key=value&key=value` must be treated as `key=value` only.
+
+
+
+```ts
+// 你的答案
+type Include<T extends unknown[], Search> = T extends [infer Item, ...infer Rest]
+  ? Search extends Item
+    ? true
+    : Include<Rest, Search>
+  : false
+
+type AndStrParser<
+  Str extends string,
+  StrArr extends unknown[] = [],
+> = Str extends `${infer Item}&${infer Rest}`
+  ? AndStrParser<Rest, [...StrArr, Item]>
+  : [...StrArr, Str]
+
+type NormalizeArr<T extends unknown[], Result extends unknown[] = []> = T extends [
+  infer Item,
+  ...infer Rest,
+]
+  ? Item extends `${infer _}=${infer _}` | ''
+    ? NormalizeArr<Rest, [...Result, Item]>
+    : NormalizeArr<Rest, [...Result, `${Item & string}=true`]>
+  : Result
+
+type DetermineTrueStr<T> = T extends 'true' ? true : T
+
+type ArrParser<Arr extends unknown[] = [], Result extends Record<string, any> = {}> = Arr extends [
+  infer Item,
+  ...infer Rest,
+]
+  ? Item extends `${infer Key}=${infer Val}`
+    ? ArrParser<
+        Rest,
+        {
+          [K in keyof Result | Key]: K extends Key
+            ? Result[Key] extends string | true
+              ? Result[Key] extends DetermineTrueStr<Val>
+                ? DetermineTrueStr<Val>
+                : [Result[Key], DetermineTrueStr<Val>]
+              : Result[Key] extends unknown[]
+                ? Include<Result[Key], DetermineTrueStr<Val>> extends true
+                  ? Result[Key]
+                  : [...Result[Key], DetermineTrueStr<Val>]
+                : DetermineTrueStr<Val>
+            : Result[K]
+        }
+      >
+    : Result
+  : Result
+
+type ParseQueryString<Str extends string> = ArrParser<NormalizeArr<AndStrParser<Str>>>
+
+```
+
