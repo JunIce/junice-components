@@ -723,3 +723,130 @@ type ParseQueryString<Str extends string> = ArrParser<NormalizeArr<AndStrParser<
 
 ```
 
+
+
+
+
+## 00189-easy-awaited
+
+If we have a type which is wrapped type like Promise. How we can get a type which is inside the wrapped type?
+
+
+
+For example: if we have `Promise<ExampleType>` how to get ExampleType?
+
+
+
+```ts
+type ExampleType = Promise<string>
+
+type Result = MyAwaited<ExampleType> // string
+```
+
+
+
+```ts
+type MyAwaited<T> = T extends PromiseLike<infer P> ? MyAwaited<P> : T
+```
+
+
+
+
+
+## 00191-medium-append-argument
+
+
+
+```typescript
+type Fn = (a: number, b: string) => number
+
+
+
+type Result = AppendArgument<Fn, boolean> 
+
+// expected be (a: number, b: string, x: boolean) => number
+```
+
+
+
+```typescript
+type AppendArgument<Fn, A> = Fn extends (...args: infer U) => infer R
+  ? (...args: [...U, A]) => R
+  : Fn
+```
+
+
+
+
+
+## 00213-hard-vue-basic-props
+
+
+
+
+For example
+
+```js
+props: {
+  foo: Boolean
+}
+// or
+props: {
+  foo: { type: Boolean }
+}
+```
+
+should be inferred to `type Props = { foo: boolean }`.
+
+When passing multiple constructors, the type should be inferred to a union.
+
+```ts
+props: {
+  foo: { type: [Boolean, Number, String] }
+}
+// -->
+type Props = { foo: boolean | number | string }
+```
+
+When an empty object is passed, the key should be inferred to `any`.
+
+For more specified cases, check out the Test Cases section.
+
+> `required`, `default`, and array props in Vue are not considered in this challenge.
+
+
+
+```typescript
+type ResultType<T> = T extends (...args: any[]) => infer R
+  ? R
+  : T extends new (...args: unknown[]) => infer S
+    ? S
+    : any
+
+type PropsTypes<T> = {
+  [P in keyof T]: T[P] extends { type: infer Result }
+    ? Result extends readonly unknown[]
+      ? ResultType<Result[number]>
+      : ResultType<Result>
+    : ResultType<T[P]>
+}
+
+declare function VueBasicProps<
+  Props,
+  Data,
+  Computed extends Record<PropertyKey, (...args: unknown[]) => unknown>,
+  Methods,
+>(options: {
+  props: Props
+  data(this: PropsTypes<Props>): Data
+  computed: Computed & ThisType<Data>
+  methods: Methods &
+  ThisType<
+      PropsTypes<Props> &
+      Methods & {
+        [P in keyof Computed]: ReturnType<Computed[P]>
+      }
+    >
+}): unknown
+```
+
