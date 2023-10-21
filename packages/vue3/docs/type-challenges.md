@@ -927,6 +927,20 @@ type Slice<
 
 
 
+## 00223-hard-isany
+
+
+
+So, let's write a utility type `IsAny<T>`, which takes input type `T`. If `T` is `any`, return `true`, otherwise, return `false`.
+
+
+
+```ts
+type IsAny<T> = boolean extends (T extends never ? true : false) ? true : false;
+```
+
+
+
 ## 00268-easy-if
 
 
@@ -949,5 +963,118 @@ type B = If<false, 'a', 'b'> // expected to be 'b'
 
 ```ts
 type If<C, T, F> = C extends true ? T : F
+```
+
+
+
+## 00270-hard-typed-get
+
+
+
+For example
+
+```ts
+type Data = {
+  foo: {
+    bar: {
+      value: 'foobar',
+      count: 6,
+    },
+    included: true,
+  },
+  hello: 'world'
+}
+
+type A = Get<Data, 'hello'> // 'world'
+type B = Get<Data, 'foo.bar.count'> // 6
+type C = Get<Data, 'foo.bar'> // { value: 'foobar', count: 6 }
+```
+
+
+
+```ts
+type Split<S extends string> = S extends `${infer First}.${infer Rest}`
+  ? [First, ...Split<Rest>]
+  : [S]
+
+type Join<S extends string[]> = S extends [infer First, ...infer Rest]
+  ? Rest['length'] extends 0
+    ? First
+    : `${First}.${Join<Rest>}`
+  : ''
+
+type Get<
+  T,
+  K extends string,
+  StrArr extends string[] = Split<K>,
+> = K extends keyof T
+  ? T[K]
+  : StrArr[0] extends keyof T
+    ? StrArr['length'] extends 1
+      ? T[StrArr[0]]
+      : Get<
+        T[StrArr[0]],
+        StrArr extends [string, ...infer Rest] ? Join<Rest> : '',
+        StrArr extends [string, ...infer Rest] ? Rest : []
+      >
+    : never
+```
+
+
+
+## 00274-extreme-integers-comparator
+
+
+
+Implement a type-level integers comparator. We've provided an enum for indicating the comparison result, like this:
+
+
+
+\- If `a` is greater than `b`, type should be `Comparison.Greater`.
+
+\- If `a` and `b` are equal, type should be `Comparison.Equal`.
+
+\- If `a` is lower than `b`, type should be `Comparison.Lower`.
+
+
+
+**Note that** **`a`** **and** **`b`** **can be positive integers or negative integers or zero, even one is positive while another one is negative.**
+
+
+
+```ts
+
+type MyEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false
+
+type IsFNumber<T extends string | number> = `${T}` extends `-${number}` ? true : false
+
+type GetNumber<T extends string | number> = `${T}` extends `-${infer N}` ? N : T
+
+type NTCompare<T extends string | number, N extends string | number> = IsFNumber<T> extends IsFNumber<N> ? never : IsFNumber<T> extends true ? Comparison.Lower : Comparison.Greater
+
+type GetNumberArray<T extends string | number, R extends number[] = []> = `${R['length']}` extends `${T}` ? R : GetNumberArray<T, [...R, 0]>
+
+type EasyCompare<A extends string | number, B extends string | number> = 
+GetNumberArray<GetNumber<A>> extends [...GetNumberArray<GetNumber<B>>, ...number[]] 
+? IsFNumber<A> extends true ? Comparison.Lower : Comparison.Greater 
+: IsFNumber<A> extends true ? Comparison.Greater : Comparison.Lower;
+
+type EComparator<A extends string | number, B extends string | number> = NTCompare<A, B> extends never ? MyEqual<A, B> extends true ? Comparison.Equal : EasyCompare<A, B> : NTCompare<A, B>
+
+type Comparator<A extends string | number, B extends string | number> = NTCompare<A, B> extends never ? MyEqual<A, B> extends true ? Comparison.Equal : 
+IsFNumber<A> extends true ? PEasyCompare<GetNumberPArray<B>, GetNumberPArray<A>> : PEasyCompare<GetNumberPArray<A>, GetNumberPArray<B>> : NTCompare<A, B>
+
+type GetNumberPArray<T extends number | string> = `${T}` extends `${infer F}${infer Rest}` ? [F, ...GetNumberPArray<Rest>] : []
+
+type PEasyCompare<A extends Array<string | number>, B extends Array<string | number>> = EComparator<A['length'], B['length']> extends Comparison.Equal 
+? PCompare<A, B> 
+: EComparator<A['length'], B['length']>
+
+type GetFirst<T extends any[]> = T[0];
+
+type GetRest<T extends any[]> = T extends [infer F, ...infer Rest] ? Rest : never;
+
+type PCompare<A extends any[], B extends any[]> = EComparator<GetFirst<A>, GetFirst<B>> extends Comparison.Equal ? 
+A['length'] extends 1 ? Comparison.Equal : PCompare<GetRest<A>, GetRest<B>> : EComparator<GetFirst<A>, GetFirst<B>>
 ```
 
