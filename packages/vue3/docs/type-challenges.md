@@ -1078,3 +1078,115 @@ type PCompare<A extends any[], B extends any[]> = EComparator<GetFirst<A>, GetFi
 A['length'] extends 1 ? Comparison.Equal : PCompare<GetRest<A>, GetRest<B>> : EComparator<GetFirst<A>, GetFirst<B>>
 ```
 
+
+
+## 00296-medium-permutation
+
+
+
+```typescript
+type perm = Permutation<'A' | 'B' | 'C'>; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+```
+
+
+
+```ts
+type Permutation<T, U = T> = [T] extends [never]
+  ? []
+  : T extends U
+    ? [T, ...Permutation<Exclude<U, T>>]
+    : []
+```
+
+
+
+
+
+## 00298-medium-length-of-string
+
+
+
+Compute the length of a string literal, which behaves like `String#length`.
+
+
+
+```ts
+type StringToArray<S extends string> = S extends `${infer F}${infer R}` ? [F, ...StringToArray<R>] : []
+
+type LengthOfString<S extends string> = StringToArray<S>['length']
+```
+
+
+
+
+
+## 00300-hard-string-to-number
+
+
+
+Convert a string literal to a number, which behaves like `Number.parseInt`.
+
+
+
+```ts
+type ToNumber<S extends string> = S extends `${infer R extends number}` ? R : never
+```
+
+
+
+
+
+## 00399-hard-tuple-filter
+
+
+
+Implement a type `FilterOut<T, F>` that filters out items of the given type `F` from the tuple `T`.
+
+
+
+For example,
+
+```ts
+type Filtered = FilterOut<[1, 2, null, 3], null> // [1, 2, 3]
+```
+
+
+
+
+
+```ts
+type FilterOut<T extends any[], U> = T extends [infer F, ...infer R]
+  ? [F] extends [U]
+      ? FilterOut<R, U>
+      : [F, ...FilterOut<R, U>]
+  : T
+
+```
+
+
+
+## 00459-medium-flatten
+
+
+
+In this challenge, you would need to write a type that takes an array and emitted the flatten array type.
+
+
+
+For example:
+
+
+
+```ts
+type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]> // [1, 2, 3, 4, 5]
+```
+
+
+
+```ts
+type Flatten<T> = T extends [] ? []
+  : T extends [infer F, ...infer A]
+    ? [...Flatten<F>, ...Flatten<A>]
+    : [T]
+```
+
