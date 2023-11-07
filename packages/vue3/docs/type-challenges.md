@@ -1241,3 +1241,73 @@ type Curry<T extends any[], R, Args extends any[] = PartialTuple<T>> = <TargetAr
 declare function DynamicParamsCurrying<T extends any[], R>(fn: (...args: T) => R): Curry<T, R>
 ```
 
+
+
+
+
+## 00472-hard-tuple-to-enum-object
+
+
+
+The enum is an original syntax of TypeScript (it does not exist in JavaScript). So it is converted to like the following form as a result of transpilation:
+```js
+let OperatingSystem;
+(function (OperatingSystem) {
+    OperatingSystem[OperatingSystem["MacOS"] = 0] = "MacOS";
+    OperatingSystem[OperatingSystem["Windows"] = 1] = "Windows";
+    OperatingSystem[OperatingSystem["Linux"] = 2] = "Linux";
+})(OperatingSystem || (OperatingSystem = {}));
+```
+In this question, the type should convert a given string tuple to an object that behaves like an enum.
+Moreover, the property of an enum is preferably a pascal case.
+```ts
+Enum<["macOS", "Windows", "Linux"]>
+// -> { readonly MacOS: "macOS", readonly Windows: "Windows", readonly Linux: "Linux" }
+```
+If `true` is given in the second argument, the value should be a number literal.
+```ts
+Enum<["macOS", "Windows", "Linux"], true>
+// -> { readonly MacOS: 0, readonly Windows: 1, readonly Linux: 2 }
+```
+
+
+
+### A1
+
+```ts
+// answer 1
+type GetTupleUntilTarget<T extends readonly string[], S extends string> =
+  T extends readonly [infer F, ...infer R extends readonly string[]]
+    ? S extends F
+      ? []
+      : [F, ...GetTupleUntilTarget<R, S>]
+    : []
+
+type Enum<T extends readonly string[], N extends boolean = false> =
+  N extends false
+    ? {
+        readonly [P in T[number] as Capitalize<P>]: P
+      }
+    : {
+        readonly [K in T[number] as Capitalize<K>]: GetTupleUntilTarget<T, K>['length']
+      }
+```
+
+
+
+### A2
+
+```ts
+// TODO
+type PascalCase<T extends string> = Capitalize<T>
+
+type StringToNumber<T> = T extends `${infer N extends number}` ? N : never
+
+type Enum<T extends readonly string[], N extends boolean = false> = {
+  [P in keyof T as T[P] extends string ? PascalCase<T[P]> : never]:
+  N extends true
+    ? StringToNumber<P>
+    : T[StringToNumber<P>]
+}
+```
+
