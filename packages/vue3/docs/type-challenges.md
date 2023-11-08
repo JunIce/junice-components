@@ -1311,3 +1311,82 @@ type Enum<T extends readonly string[], N extends boolean = false> = {
 }
 ```
 
+
+
+## 00476-extreme-sum
+
+
+
+Implement a type `Sum<A, B>` that summing two non-negative integers and returns the sum as a string. Numbers can be specified as a string, number, or bigint.
+
+
+
+For example,
+
+
+
+```ts
+type T0 = Sum<2, 3> // '5'
+type T1 = Sum<'13', '21'> // '34'
+type T2 = Sum<'328', 7> // '335'
+type T3 = Sum<1_000_000_000_000n, '123'> // '1000000000123'
+```
+
+
+
+```ts
+// sum the lengths of three arrays
+type ArrToSum<T extends any[], U extends any[], S extends any[]> = `${[
+  ...T,
+  ...U,
+  ...S,
+]['length']}`
+
+  // convert a number string (e.g., "1", "21") to an array with the corresponding length
+  type StrToArr<T extends string, U extends never[] = []> = T extends ''
+    ? []
+    : `${U['length']}` extends `${T}`
+      ? U
+      : StrToArr<T, [...U, never]>
+
+  // sum single digits (e.g., A = "1", B = "2", C="5")
+  type SumDigit<A extends string, B extends string, C extends string> =
+  ArrToSum<StrToArr<LastDigit<A>>, StrToArr<LastDigit<B>>, StrToArr<C>>
+
+  // extract the last digit (e.g., extract "4" from "1234")
+  type LastDigit<T extends string> = T extends `${infer P}${infer Q}`
+    ? Q extends ''
+      ? P
+      : LastDigit<Q>
+    : ''
+
+  // extract the digits other than the laast digit (e.g., extract "123" from "1234")
+  type RestDigits<T extends string> = T extends ''
+    ? ''
+    : T extends `${infer P}${infer Q}`
+      ? Q extends ''
+        ? ''
+        : `${P}${RestDigits<Q>}`
+      : ''
+
+  // main calculation logic. takes A, B, and Carry.
+  // Carry represents the carry digit from previous digit calculation.
+  // the calculation is done recursively, digit by digit.
+  type _Sum<
+    A extends string,
+    B extends string,
+    Carry extends string = '0',
+  > = `${A}${B}${Carry}` extends ''
+    ? ''
+    : `${_Sum<
+        RestDigits<A>,
+        RestDigits<B>,
+        RestDigits<SumDigit<A, B, Carry>>
+      >}${LastDigit<SumDigit<A, B, Carry>>}`
+
+  type Sum<
+    A extends string | number | bigint,
+    B extends string | number | bigint,
+  > = _Sum<`${A}`, `${B}`>
+```
+
