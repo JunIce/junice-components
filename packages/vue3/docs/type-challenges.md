@@ -1445,3 +1445,53 @@ type Multiply<
 
 ```
 
+
+
+## 00527-medium-append-to-object
+
+
+
+For example
+
+
+
+```ts
+type Test = { id: '1' }
+
+type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', value: 4 }
+```
+
+
+
+```ts
+type AppendToObject<T extends object, U extends string, V> = {
+  [P in keyof T | U]: P extends U
+    ? V
+    : (P extends keyof T ? T[P] : never)
+}
+```
+
+
+
+
+
+## 00529-medium-absolute
+
+
+
+For example
+
+
+
+```ts
+type Test = -100
+
+type Result = Absolute<Test> // expected to be "100"
+```
+
+
+
+```ts
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer U}` ? U : `${T}`
+```
+
