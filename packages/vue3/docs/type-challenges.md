@@ -1495,3 +1495,41 @@ type Result = Absolute<Test> // expected to be "100"
 type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer U}` ? U : `${T}`
 ```
 
+
+
+## 00531-medium-string-to-union
+
+
+
+```ts
+type Test = "123"
+type Result = StringToUnion<Test> // expected to be "1" | "2" | "3"
+```
+
+
+
+```ts
+type StringToUnion<T extends string> = T extends `${infer A}${infer R}`
+  ? A | StringToUnion<R> : never
+```
+
+
+
+## 00533-easy-concat
+
+
+
+For example:
+
+
+
+```ts
+type Result = Concat<[1], [2]> // expected to be [1, 2]
+```
+
+
+
+```ts
+type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+```
+
