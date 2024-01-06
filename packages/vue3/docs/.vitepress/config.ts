@@ -29,6 +29,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Type Challenges', link: '/type-challenges' },
+      { text: 'Interview', link: '/interview' },
     ],
 
     sidebar: {
