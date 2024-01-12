@@ -762,7 +762,7 @@ type Fn = (a: number, b: string) => number
 
 
 
-type Result = AppendArgument<Fn, boolean> 
+type Result = AppendArgument<Fn, boolean>
 
 // expected be (a: number, b: string, x: boolean) => number
 ```
@@ -1054,27 +1054,27 @@ type NTCompare<T extends string | number, N extends string | number> = IsFNumber
 
 type GetNumberArray<T extends string | number, R extends number[] = []> = `${R['length']}` extends `${T}` ? R : GetNumberArray<T, [...R, 0]>
 
-type EasyCompare<A extends string | number, B extends string | number> = 
-GetNumberArray<GetNumber<A>> extends [...GetNumberArray<GetNumber<B>>, ...number[]] 
-? IsFNumber<A> extends true ? Comparison.Lower : Comparison.Greater 
+type EasyCompare<A extends string | number, B extends string | number> =
+GetNumberArray<GetNumber<A>> extends [...GetNumberArray<GetNumber<B>>, ...number[]]
+? IsFNumber<A> extends true ? Comparison.Lower : Comparison.Greater
 : IsFNumber<A> extends true ? Comparison.Greater : Comparison.Lower;
 
 type EComparator<A extends string | number, B extends string | number> = NTCompare<A, B> extends never ? MyEqual<A, B> extends true ? Comparison.Equal : EasyCompare<A, B> : NTCompare<A, B>
 
-type Comparator<A extends string | number, B extends string | number> = NTCompare<A, B> extends never ? MyEqual<A, B> extends true ? Comparison.Equal : 
+type Comparator<A extends string | number, B extends string | number> = NTCompare<A, B> extends never ? MyEqual<A, B> extends true ? Comparison.Equal :
 IsFNumber<A> extends true ? PEasyCompare<GetNumberPArray<B>, GetNumberPArray<A>> : PEasyCompare<GetNumberPArray<A>, GetNumberPArray<B>> : NTCompare<A, B>
 
 type GetNumberPArray<T extends number | string> = `${T}` extends `${infer F}${infer Rest}` ? [F, ...GetNumberPArray<Rest>] : []
 
-type PEasyCompare<A extends Array<string | number>, B extends Array<string | number>> = EComparator<A['length'], B['length']> extends Comparison.Equal 
-? PCompare<A, B> 
+type PEasyCompare<A extends Array<string | number>, B extends Array<string | number>> = EComparator<A['length'], B['length']> extends Comparison.Equal
+? PCompare<A, B>
 : EComparator<A['length'], B['length']>
 
 type GetFirst<T extends any[]> = T[0];
 
 type GetRest<T extends any[]> = T extends [infer F, ...infer Rest] ? Rest : never;
 
-type PCompare<A extends any[], B extends any[]> = EComparator<GetFirst<A>, GetFirst<B>> extends Comparison.Equal ? 
+type PCompare<A extends any[], B extends any[]> = EComparator<GetFirst<A>, GetFirst<B>> extends Comparison.Equal ?
 A['length'] extends 1 ? Comparison.Equal : PCompare<GetRest<A>, GetRest<B>> : EComparator<GetFirst<A>, GetFirst<B>>
 ```
 
@@ -1215,7 +1215,7 @@ Thus, based on `Currying 1`, we would need to have the dynamic argument version:
 
 ```ts
 const add = (a: number, b: number, c: number) => a + b + c
-const three = add(1, 1, 1) 
+const three = add(1, 1, 1)
 
 const curriedAdd = DynamicParamsCurrying(add)
 const six = curriedAdd(1, 2, 3)
@@ -1400,7 +1400,7 @@ Implement a type `Multiply<A, B>` that multiplies two non-negative integers and 
 
 
 
-For example: 
+For example:
 
 
 
@@ -1531,5 +1531,91 @@ type Result = Concat<[1], [2]> // expected to be [1, 2]
 
 ```ts
 type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+```
+
+## 00545-hard-printf
+
+Implement `Format<T extends string>` generic.
+
+For example,
+
+```ts
+type FormatCase1 = Format<"%sabc"> // FormatCase1 : string => string
+type FormatCase2 = Format<"%s%dabc"> // FormatCase2 : string => number => string
+type FormatCase3 = Format<"sdabc"> // FormatCase3 :  string
+type FormatCase4 = Format<"sd%abc"> // FormatCase4 :  string
+```
+
+
+```ts
+type FormatType = { s: string, d: number, f: number/*, ...*/ };
+
+type Format<T extends string> = T extends `${any}%${infer S}${infer R}` ?
+  S extends keyof FormatType ? (arg: FormatType[S]) => Format<R> : Format<R> :
+  string;
+```
+
+
+## 00553-hard-deep-object-to-unique
+
+For example,
+
+```ts
+import { Equal } from "@type-challenges/utils"
+
+type Foo = { foo: 2; bar: { 0: 1 }; baz: { 0: 1 } }
+
+type UniqFoo = DeepObjectToUniq<Foo>
+
+declare let foo: Foo
+declare let uniqFoo: UniqFoo
+
+uniqFoo = foo // ok
+foo = uniqFoo // ok
+
+type T0 = Equal<UniqFoo, Foo> // false
+type T1 = UniqFoo["foo"] // 2
+type T2 = Equal<UniqFoo["bar"], UniqFoo["baz"]> // false
+type T3 = UniqFoo["bar"][0] // 1
+type T4 = Equal<keyof Foo & string, keyof UniqFoo & string> // true
+```
+
+```ts
+type DeepObjectToUniq<
+  O extends object,
+  _UniqFlag extends [PropertyKey?, object?] = []
+> = {
+  [P in keyof O]: O[P] extends object ? DeepObjectToUniq<O[P], [P, O]> : O[P]
+} & { [flag: symbol]: _UniqFlag }
+```
+
+
+## 00599-medium-merge
+
+Merge two types into a new type. Keys of the second type overrides keys of the first type.
+
+For example
+
+```ts
+type foo = {
+  name: string
+  age: string
+}
+type coo = {
+  age: number
+  sex: string
+}
+
+type Result = Merge<foo, coo> // expected to be {name: string, age: number, sex: string}
+```
+
+```ts
+type Merge<F, S> = {
+  [key in keyof F | keyof S]: key extends keyof S
+    ? S[key]
+    : key extends keyof F
+    ? F[key]
+    : never
+}
 ```
 
