@@ -1643,3 +1643,11 @@ type KebabCase<S> = S extends `${infer S1}${infer S2}`
   : S
 ```
 
+
+## 00645-medium-diff
+
+Get an `Object` that is the difference between `O` & `O1`
+
+```ts
+type Diff<O, O1> = Omit<O & O1, keyof O & keyof O1>;
+```
